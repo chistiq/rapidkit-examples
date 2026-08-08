@@ -14,20 +14,31 @@ Every published workspace must commit:
 - `.workspai/policies.yml`
 - `.workspai/toolchain.lock`
 - `.workspai/cache-config.yml`
+- `AGENTS.md` and `.workspai/AGENT-GROUNDING.md`
+- `.workspai/skills/` operational guidance
+- `CLAUDE.md`, `.claude/rules/`, and `.cursor/rules/`
+- `.github/copilot-instructions.md`, Workspai agents, and the Workspai skill
 
 The workspace contract must use relative project paths, contain no secrets or
 machine-local paths, and agree with [examples.json](examples.json).
 
-Published Python workspaces pin `rapidkit-core==0.5.5` exactly and commit the
+Published Python workspaces pin `rapidkit-core==0.6.0` exactly and commit the
 matching Poetry lockfile. Updating that baseline requires module regeneration,
 project tests, runtime smoke checks, and this repository gate; changing only
 the dependency string is not sufficient.
 
 Every project `registry.json` is the project-level record of installed Core
-modules. Snippet registries must not carry unresolved failed or pending entries.
-Source wrappers that identify generated Core implementations must select the
-same version recorded by the registry. Generated vendor payloads are not part
-of the published example source.
+modules. Every Core-backed project must also commit `.rapidkit/modules.lock.yaml`
+so clean clones can run the deterministic restore path:
+
+```bash
+rapidkit modules restore --locked --ci
+```
+
+Snippet registries must not carry unresolved failed or pending entries. Source
+wrappers that identify generated Core implementations must select the same
+version recorded by the registry and lock. Generated vendor payloads are not
+part of the published example source.
 
 ## Required user journey
 
@@ -45,10 +56,17 @@ download without relying on machine-local state. It must include:
 - a clear explanation that Workspai complements existing agents, models, IDEs,
   and frameworks by generating evidence-backed context rather than replacing
   those tools
+- a direct pointer to the committed `AGENTS.md` and Copilot instruction entry
+  points
 
 The repository validator enforces these minimums for real examples and raw
 profile fixtures. User-facing commands must remain aligned with the current
 Workspai CLI contract.
+
+The current public validation baseline is `workspai@0.55.1`. Each published
+workspace README must expose the canonical runner
+`workspace intelligence run --for-agent generic --strict --json`; focused
+stage commands may supplement it but may not replace or redefine its order.
 
 ## Required project files
 
@@ -60,6 +78,8 @@ Every runnable project must commit:
 - Docker/CI configuration when it is part of the documented example
 - canonical `.workspai/project.json` for Workspai-created or explicitly adopted
   projects
+- `.rapidkit/modules.lock.yaml` for legacy Core-backed projects that install
+  RapidKit modules
 
 The current Core-backed examples predate canonical project metadata. Their
 `.rapidkit/project.json`, context, launcher, file hashes, and snippet registry
@@ -76,13 +96,17 @@ module installation/restore path using the committed registry and locks.
 
 Publish these only when the example explicitly teaches or consumes them:
 
-- `AGENTS.md`, Skills, and agent instructions generated from the workspace
 - infrastructure plans or compose files intended for local development
 - sanitized evidence fixtures stored outside live `.workspai/reports/` paths
 - legacy `.rapidkit*` metadata required by an older Core-backed project
 - compatibility launchers generated when Python Core installation is deferred
 
 Conditional files must be portable, reviewable, and covered by the example.
+
+Consumer projections are required, but live `.workspai/reports/` are not. The
+committed files show each supported tool how to discover and refresh evidence;
+the local canonical run owns current health, graph, impact, and verification
+claims.
 
 ## Never publish
 
@@ -105,7 +129,7 @@ clearly named fixture directory and validate it against its schema.
 ```bash
 npx workspai workspace sync
 npx workspai workspace contract verify --strict --json
-npx workspai workspace model --json --write
+npx workspai workspace intelligence run --for-agent generic --strict --json
 ```
 
 `workspace sync` recreates the machine-local registry summary and reports from

@@ -8,7 +8,7 @@ import { registerAs } from '@nestjs/config';
 // RAPIDKIT_VENDOR_ROOT override) instead of a hard-coded relative import.
 const VENDOR_ROOT_ENV = 'RAPIDKIT_VENDOR_ROOT';
 const VENDOR_MODULE = 'settings';
-const DEFAULT_VENDOR_VERSION = '0.1.45';
+const DEFAULT_VENDOR_VERSION = '0.1.48';
 const VENDOR_VERSION_ENV = 'RAPIDKIT_SETTINGS_VENDOR_VERSION';
 const VENDOR_CONFIGURATION_RELATIVE = 'nestjs/configuration.js';
 const SETTINGS_NAMESPACE = 'settings';

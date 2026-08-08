@@ -30,7 +30,7 @@ Teams building support automation systems that need a faster path to:
 Use the public AI Agent Workspace first:
 
 ```bash
-git clone https://github.com/rapidkitlabs/rapidkit-examples.git
+git clone https://github.com/chistiq/rapidkit-examples.git
 cd rapidkit-examples/my-ai-workspace
 npx workspai doctor workspace
 ```

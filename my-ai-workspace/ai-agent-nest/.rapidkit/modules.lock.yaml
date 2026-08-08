@@ -1,0 +1,39 @@
+core_version: 0.6.0
+generated_at: '2026-08-08T21:41:15.991403Z'
+modules:
+  free/essentials/settings:
+    version: 0.1.48
+    tags:
+    - config
+    - settings
+    - env
+  free/essentials/logging:
+    version: 0.1.17
+    tags:
+    - logging
+    - observability
+    - tracing
+  free/essentials/deployment:
+    version: 0.1.16
+    tags:
+    - essentials
+    - deployment
+    - devops
+  free/essentials/middleware:
+    version: 0.1.26
+    tags:
+    - essentials
+    - middleware
+    - http
+  free/ai/ai_assistant:
+    version: 0.1.22
+    tags:
+    - core
+    - ai
+  free/auth/api_keys:
+    version: 0.1.7
+    tags:
+    - api-keys
+    - auth
+    - security
+    - auditing

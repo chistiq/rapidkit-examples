@@ -86,9 +86,9 @@
       "version": "0.1.10"
     },
     "src/modules/free/essentials/deployment/deployment.py": {
-      "hash": "eb9fb79e90d72c6f776d05bab1423e9941610e622a87c4a6573a1a386b5bd8cb",
+      "hash": "17ba55bc879c18f9fc6c2f66dce301a6d22bffa8c05cd037858ba21fc8ca9d37",
       "module": "deployment",
-      "version": "0.1.13"
+      "version": "0.1.16"
     },
     "src/modules/free/essentials/deployment/routers/deployment.py": {
       "hash": "34de40b5e52b9f805545da8e6df26db7f83a0f45715c5bfdeb89f5f0fc69f6b9",
@@ -101,9 +101,9 @@
       "version": "0.1.9"
     },
     "src/modules/free/essentials/logging/logging.py": {
-      "hash": "ac44c2df8988bea29ef1fc397dc19912a2751578cfa616c3038f86b4f3fc47fe",
+      "hash": "2671445719fbcba3cb5e88db897646e5e30d260b060d4ff5d950ed0a30d48cc8",
       "module": "logging",
-      "version": "0.1.13"
+      "version": "0.1.17"
     },
     "src/modules/free/essentials/logging/routers/logging.py": {
       "hash": "1915b7339acefd7791cf9f18bdae4d6e4d8160cb2a7f9edc9d22b6111e28bc4a",

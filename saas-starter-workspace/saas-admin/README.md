@@ -1,6 +1,6 @@
 # saas-admin
 
-Admin operations API for internal tools, user management, and support workflows. Domain-driven FastAPI service generated with [RapidKit](https://github.com/rapidkitlabs/rapidkit-core).
+Admin operations API for internal tools, user management, and support workflows. Domain-driven FastAPI service generated with [RapidKit](https://github.com/chistiq/rapidkit-core).
 
 **Related:** Part of [saas-starter-workspace](../README.md) - Production SaaS architecture with 4 microservices.
 
@@ -300,4 +300,4 @@ npx workspai dev --port 8001
 
 **Need help?**
 - Documentation: https://getrapidkit.com/docs
-- GitHub Issues: https://github.com/rapidkitlabs/rapidkit-core/issues
+- GitHub Issues: https://github.com/chistiq/rapidkit-core/issues

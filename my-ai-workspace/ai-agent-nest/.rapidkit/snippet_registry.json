@@ -5,8 +5,8 @@
       "version": "1.0.0",
       "priority": 10,
       "file": ".env",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:42:51.943579+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:41:08.215278+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "nestjs/standard",
@@ -20,7 +20,7 @@
           ],
           "file_path": "logs/app.log",
           "async_queue": true,
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -58,7 +58,7 @@
           },
           "LOG_SAMPLING_RATE": {
             "type": "number",
-            "default": 1,
+            "default": 1.0,
             "description": "Sampling rate for verbose loggers"
           },
           "LOG_ENABLE_REDACTION": {
@@ -81,15 +81,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:42:51.943579+00:00"
+      "applied_at": "2026-08-08T21:39:41.266054+00:00",
+      "last_error": "already present in .env"
     },
     "logging_env::.env.dev": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 10,
       "file": ".env.dev",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:42:51.951735+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:41:08.221533+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "nestjs/standard",
@@ -103,7 +104,7 @@
           ],
           "file_path": "logs/app.log",
           "async_queue": true,
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -141,7 +142,7 @@
           },
           "LOG_SAMPLING_RATE": {
             "type": "number",
-            "default": 1,
+            "default": 1.0,
             "description": "Sampling rate for verbose loggers"
           },
           "LOG_ENABLE_REDACTION": {
@@ -164,15 +165,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:42:51.951735+00:00"
+      "applied_at": "2026-07-12T17:42:51.951735+00:00",
+      "last_error": "already present in .env.dev"
     },
     "logging_env::.env.prod": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 10,
       "file": ".env.prod",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:42:51.959005+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:41:08.227710+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "nestjs/standard",
@@ -186,7 +188,7 @@
           ],
           "file_path": "logs/app.log",
           "async_queue": true,
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -224,7 +226,7 @@
           },
           "LOG_SAMPLING_RATE": {
             "type": "number",
-            "default": 1,
+            "default": 1.0,
             "description": "Sampling rate for verbose loggers"
           },
           "LOG_ENABLE_REDACTION": {
@@ -247,7 +249,8 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:42:51.959005+00:00"
+      "applied_at": "2026-07-12T17:42:51.959005+00:00",
+      "last_error": "already present in .env.prod"
     },
     "logging_env::.env.example": {
       "anchor": "# <<<inject:module-env>>>",
@@ -255,7 +258,7 @@
       "priority": 10,
       "file": ".env.example",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:49:50.420054+00:00",
+      "last_attempt_at": "2026-08-08T21:41:08.234098+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "nestjs/standard",
@@ -269,7 +272,7 @@
           ],
           "file_path": "logs/app.log",
           "async_queue": true,
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -307,7 +310,7 @@
           },
           "LOG_SAMPLING_RATE": {
             "type": "number",
-            "default": 1,
+            "default": 1.0,
             "description": "Sampling rate for verbose loggers"
           },
           "LOG_ENABLE_REDACTION": {
@@ -330,15 +333,15 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:49:50.420054+00:00"
+      "applied_at": "2026-08-08T21:41:08.234098+00:00"
     },
     "logging_settings_fields_nestjs::configuration.ts": {
       "anchor": "// <<<inject:settings-fields>>>",
       "version": "1.0.0",
       "priority": 20,
       "file": "src/modules/free/essentials/settings/configuration.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:42:51.971768+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:41:08.238126+00:00",
       "template": "logging_fields_nestjs.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "nestjs/standard",
@@ -352,7 +355,7 @@
           ],
           "async_queue": true,
           "file_path": "logs/app.log",
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -365,15 +368,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-02-12T11:10:28.019845+00:00"
+      "applied_at": "2026-02-12T11:10:28.019845+00:00",
+      "last_error": "already present in configuration.ts"
     },
     "ai_assistant_nestjs_module_registry::index.ts": {
       "anchor": "// <<<inject:module-exports>>>",
       "version": "1.0.0",
       "priority": 30,
       "file": "src/modules/index.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:42:59.627424+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:41:13.713190+00:00",
       "template": "ai_assistant.nestjs.module_registry.snippet.j2",
       "module_slug": "free/ai/ai_assistant",
       "profile": "nestjs/standard",
@@ -385,7 +389,8 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:42:59.627424+00:00"
+      "applied_at": "2026-07-12T17:42:59.627424+00:00",
+      "last_error": "already present in index.ts"
     }
   }
 }

@@ -7,6 +7,37 @@
 **/.rapidkit/tmp/
 **/.rapidkit/vendor/
 
+# Runtime environments, dependency trees, caches, and build output are local.
+**/.venv/
+**/node_modules/
+**/dist/
+**/coverage/
+**/htmlcov/
+**/.coverage
+**/.cache/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/__pycache__/
+**/*.py[cod]
+**/*.log
+
+# Never publish populated environment files. The three explicit templates are
+# portable examples and intentionally remain trackable.
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.dev
+!**/.env.prod
+
+# Private keys and local trust stores are never example source.
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/*.jks
+**/*.keystore
+
 # Workspai runtime evidence is machine-local. Publish portable workspace
 # foundations and contracts, but regenerate summaries/reports after cloning.
 **/.workspai/reports/
@@ -14,3 +45,10 @@
 **/.workspai/imported-projects.json
 **/.workspai/adopt.json
 **/.workspai/adopt-readiness.json
+**/.workspai/workspace-link.local.json
+
+# Editor and operating-system state.
+**/.DS_Store
+**/Thumbs.db
+**/.idea/
+**/.vscode/

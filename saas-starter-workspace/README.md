@@ -6,7 +6,7 @@ webhook processing.
 **Related Articles:**
 - Medium: [Building Production SaaS Architecture: Deep Dive into Multi-Service Implementation](https://rapidkit.medium.com/building-production-saas-architecture-deep-dive-into-multi-service-implementation-8a838f36e4ad)
 - Dev.to: [Build Production SaaS: Code Walkthrough (FastAPI + NestJS + Webhooks)](https://dev.to/rapidkit/build-production-saas-code-walkthrough-4c7c)
-- Source repository: https://github.com/rapidkitlabs/rapidkit-examples/tree/main/saas-starter-workspace
+- Source repository: https://github.com/chistiq/rapidkit-examples/tree/main/saas-starter-workspace
 
 **Projects in this workspace:**
 - [saas-api](saas-api/README.md) - Product API with auth, subscriptions, teams (FastAPI + DDD)
@@ -33,6 +33,14 @@ npx workspai workspace contract inspect
 npx workspai workspace contract verify --strict --json
 npx workspai workspace model --json --write
 npx workspai doctor workspace --json
+npx workspai workspace intelligence run --for-agent generic --strict --json
+```
+
+`hydrate:core` uses the Core restore contract when the pinned engine supports
+it:
+
+```bash
+rapidkit modules restore --locked --ci
 ```
 
 The first sync registers this workspace on the current machine and discovers
@@ -52,6 +60,14 @@ npx workspai workspace sync
 Complete baseline, diff, impact, verify, agent context, agent-sync, explain, and
 CI workflow: [Workspace onboarding](../WORKSPACE_ONBOARDING.md).
 
+## AI and IDE entry points
+
+Start with `AGENTS.md` for the workspace-wide view and each project's own
+`AGENTS.md` for a bounded project lens. Copilot uses
+`.github/copilot-instructions.md`; Claude and Cursor use `CLAUDE.md`,
+`.claude/`, and `.cursor/`. Run the canonical intelligence command above after
+clone to refresh current evidence before relying on health or release claims.
+
 ---
 
 ## ⚡ Quick Start
@@ -60,7 +76,7 @@ CI workflow: [Workspace onboarding](../WORKSPACE_ONBOARDING.md).
 
 ```bash
 # Clone the examples repository
-git clone https://github.com/rapidkitlabs/rapidkit-examples.git
+git clone https://github.com/chistiq/rapidkit-examples.git
 cd rapidkit-examples
 npm run hydrate:core -- \
   --workspace saas-starter-workspace \
@@ -480,5 +496,5 @@ export STRIPE_WEBHOOK_SECRET="whsec_test"
 
 **Need help?**
 - Documentation: https://getrapidkit.com/docs
-- GitHub Issues: https://github.com/rapidkitlabs/rapidkit-core/issues
+- GitHub Issues: https://github.com/chistiq/rapidkit-core/issues
 - Community: https://discord.gg/rapidkit

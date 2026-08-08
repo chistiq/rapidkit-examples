@@ -5,8 +5,8 @@
       "version": "1.0.0",
       "priority": 10,
       "file": ".env",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:34:52.898088+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:40:57.530760+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "fastapi/standard",
@@ -20,7 +20,7 @@
           ],
           "file_path": "logs/app.log",
           "async_queue": true,
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -58,7 +58,7 @@
           },
           "LOG_SAMPLING_RATE": {
             "type": "number",
-            "default": 1,
+            "default": 1.0,
             "description": "Sampling rate for verbose loggers"
           },
           "LOG_ENABLE_REDACTION": {
@@ -81,7 +81,8 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:34:52.898088+00:00"
+      "applied_at": "2026-08-08T21:38:25.157598+00:00",
+      "last_error": "already present in .env"
     },
     "logging_env::.env.dev": {
       "anchor": "# <<<inject:module-env>>>",
@@ -89,7 +90,7 @@
       "priority": 10,
       "file": ".env.dev",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:34:52.905443+00:00",
+      "last_attempt_at": "2026-08-08T21:40:57.542598+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "fastapi/standard",
@@ -103,7 +104,7 @@
           ],
           "file_path": "logs/app.log",
           "async_queue": true,
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -141,7 +142,7 @@
           },
           "LOG_SAMPLING_RATE": {
             "type": "number",
-            "default": 1,
+            "default": 1.0,
             "description": "Sampling rate for verbose loggers"
           },
           "LOG_ENABLE_REDACTION": {
@@ -164,7 +165,7 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:34:52.905443+00:00"
+      "applied_at": "2026-08-08T21:40:57.542598+00:00"
     },
     "logging_env::.env.prod": {
       "anchor": "# <<<inject:module-env>>>",
@@ -172,7 +173,7 @@
       "priority": 10,
       "file": ".env.prod",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:34:52.912154+00:00",
+      "last_attempt_at": "2026-08-08T21:40:57.554010+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "fastapi/standard",
@@ -186,7 +187,7 @@
           ],
           "file_path": "logs/app.log",
           "async_queue": true,
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -224,7 +225,7 @@
           },
           "LOG_SAMPLING_RATE": {
             "type": "number",
-            "default": 1,
+            "default": 1.0,
             "description": "Sampling rate for verbose loggers"
           },
           "LOG_ENABLE_REDACTION": {
@@ -247,7 +248,7 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:34:52.912154+00:00"
+      "applied_at": "2026-08-08T21:40:57.554010+00:00"
     },
     "logging_env::.env.example": {
       "anchor": "# <<<inject:module-env>>>",
@@ -255,7 +256,7 @@
       "priority": 10,
       "file": ".env.example",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:34:52.918879+00:00",
+      "last_attempt_at": "2026-08-08T21:40:57.564470+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "fastapi/standard",
@@ -269,7 +270,7 @@
           ],
           "file_path": "logs/app.log",
           "async_queue": true,
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -307,7 +308,7 @@
           },
           "LOG_SAMPLING_RATE": {
             "type": "number",
-            "default": 1,
+            "default": 1.0,
             "description": "Sampling rate for verbose loggers"
           },
           "LOG_ENABLE_REDACTION": {
@@ -330,15 +331,15 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:34:52.918879+00:00"
+      "applied_at": "2026-08-08T21:40:57.564470+00:00"
     },
     "logging_settings_fields::settings.py": {
       "anchor": "# <<<inject:settings-fields>>>",
       "version": "1.0.0",
       "priority": 20,
       "file": "src/modules/free/essentials/settings/settings.py",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:34:52.922566+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:40:57.567950+00:00",
       "template": "logging_fields.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "fastapi/standard",
@@ -353,7 +354,7 @@
           ],
           "async_queue": true,
           "file_path": "logs/app.log",
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "correlation_header": "X-Request-ID",
           "healthcheck_enabled": true,
@@ -367,15 +368,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-02-12T09:14:39.471025+00:00"
+      "applied_at": "2026-02-12T09:14:39.471025+00:00",
+      "last_error": "already present in settings.py"
     },
     "middleware_correlation_factory::middleware.py": {
       "anchor": "# <<<inject:middleware-factories>>>",
       "version": "0.1.0",
       "priority": 20,
       "file": "src/modules/free/essentials/middleware/middleware.py",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:34:55.175134+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:41:01.212957+00:00",
       "template": "middleware.snippet.j2",
       "module_slug": "free/essentials/middleware",
       "profile": "fastapi/standard",
@@ -385,7 +387,8 @@
         "request_header": "X-Request-ID",
         "response_header": "X-Request-ID"
       },
-      "applied_at": "2026-07-12T17:34:55.175134+00:00"
+      "applied_at": "2026-07-12T17:34:55.175134+00:00",
+      "last_error": "already present in middleware.py"
     }
   }
 }

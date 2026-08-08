@@ -293,7 +293,7 @@ export class ApiKeysService {
       issues,
       metadata: {
         module: "api_keys",
-        version: "0.1.5",
+        version: "0.1.7",
       },
     };
   }

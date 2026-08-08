@@ -92,7 +92,7 @@ const RAW_SETTINGS: OauthSettingsTemplate = {
   "state_cleanup_interval": 60,
   "state_ttl_seconds": 300
 };
-const MODULE_VERSION = "0.1.16";
+const MODULE_VERSION = "0.1.18";
 const STARTED_AT = Date.now();
 
 const FEATURE_FLAGS = [

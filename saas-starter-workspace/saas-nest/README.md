@@ -1,6 +1,6 @@
 # saas-nest
 
-Polyglot microservice demonstrating FastAPI/NestJS coexistence in production SaaS architecture. NestJS 11 service generated with [RapidKit](https://github.com/rapidkitlabs/rapidkit-core).
+Polyglot microservice demonstrating FastAPI/NestJS coexistence in production SaaS architecture. NestJS 11 service generated with [RapidKit](https://github.com/chistiq/rapidkit-core).
 
 **Related:** Part of [saas-starter-workspace](../README.md) - Production SaaS architecture with 4 microservices.
 
@@ -440,5 +440,5 @@ yarn install
 
 **Need help?**
 - Documentation: https://getrapidkit.com/docs
-- GitHub Issues: https://github.com/rapidkitlabs/rapidkit-core/issues
+- GitHub Issues: https://github.com/chistiq/rapidkit-core/issues
 - NestJS Discord: https://discord.gg/nestjs

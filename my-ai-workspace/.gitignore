@@ -4,3 +4,19 @@ __pycache__/
 .env
 .rapidkit-workspace/
 
+# Portable example boundary
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.dev
+!**/.env.prod
+**/.venv/
+**/node_modules/
+**/vendor/
+**/.workspai/reports/
+**/.workspai/workspace-registry.v1.json
+**/.workspai/workspace-link.local.json
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx

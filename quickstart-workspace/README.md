@@ -6,7 +6,7 @@ services.
 **Related Articles:**
 - Medium: [From Zero to Production FastAPI with RapidKit: Build a Real E-Commerce API](https://medium.com/@rapidkit/from-zero-to-production-fastapi-with-rapidkit-build-a-real-e-commerce-api-80390a34ffe3)
 - Dev.to: [Build a Production-Ready FastAPI E-Commerce API with RapidKit (Step-by-Step)](https://dev.to/rapidkit/build-a-production-ready-fastapi-e-commerce-api-with-rapidkit-step-by-step-llm)
-- Source repository: https://github.com/rapidkitlabs/rapidkit-examples/tree/main/quickstart-workspace
+- Source repository: https://github.com/chistiq/rapidkit-examples/tree/main/quickstart-workspace
 
 **Projects in this workspace:**
 - [product-api](product-api/README.md) - Production-pattern FastAPI with auth, database, caching, and monitoring
@@ -25,6 +25,7 @@ npx workspai workspace contract inspect
 npx workspai workspace contract verify --strict --json
 npx workspai workspace model --json --write
 npx workspai doctor workspace --json
+npx workspai workspace intelligence run --for-agent generic --strict --json
 ```
 
 The first sync registers this workspace on the current machine and discovers
@@ -42,6 +43,14 @@ npx workspai workspace sync
 Complete baseline, diff, impact, verify, agent context, agent-sync, explain, and
 CI workflow: [Workspace onboarding](../WORKSPACE_ONBOARDING.md).
 
+## AI and IDE entry points
+
+Start with `AGENTS.md` for the workspace-wide view and each project's own
+`AGENTS.md` for a bounded project lens. Copilot uses
+`.github/copilot-instructions.md`; Claude and Cursor use `CLAUDE.md`,
+`.claude/`, and `.cursor/`. Run the canonical intelligence command above after
+clone to refresh current evidence before relying on health or release claims.
+
 ---
 
 ## ⚡ Quick Start
@@ -50,7 +59,7 @@ CI workflow: [Workspace onboarding](../WORKSPACE_ONBOARDING.md).
 
 ```bash
 # Clone the examples repository
-git clone https://github.com/rapidkitlabs/rapidkit-examples.git
+git clone https://github.com/chistiq/rapidkit-examples.git
 cd rapidkit-examples
 npm run hydrate:core -- \
   --workspace quickstart-workspace \
@@ -59,6 +68,13 @@ npm run hydrate:core -- \
 cd quickstart-workspace
 npx workspai workspace sync
 npx workspai workspace contract verify --strict --json
+```
+
+`hydrate:core` uses the Core restore contract when the pinned engine supports
+it:
+
+```bash
+rapidkit modules restore --locked --ci
 ```
 
 ### 2. Start Infrastructure

@@ -1,9 +1,14 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "schemaVersion": "workspai.examples-index.v1",
-    "version": "1.1.0",
-    "lastUpdated": "2026-07-12T00:00:00Z",
-    "repository": "https://github.com/rapidkitlabs/rapidkit-examples",
+    "version": "1.2.0",
+    "lastUpdated": "2026-08-08T00:00:00Z",
+    "repository": "https://github.com/chistiq/rapidkit-examples",
+    "validationBaseline": {
+        "workspai": "0.55.1",
+        "rapidkitCore": "0.6.0",
+        "canonicalIntelligenceCommand": "workspai workspace intelligence run --for-agent generic --strict --json"
+    },
     "publicationPolicy": {
         "repositoryRole": "public_cloneable_examples_and_showcases",
         "freeWorkspacesMustBeCloneable": true,
@@ -121,7 +126,7 @@
             "requirements": {
                 "python": ">=3.10",
                 "node": ">=20",
-                "workspai": ">=0.43.1"
+                "workspai": ">=0.55.1"
             },
             "quickStart": {
                 "fastapi": [
@@ -230,7 +235,7 @@
             ],
             "requirements": {
                 "python": ">=3.10",
-                "workspai": ">=0.43.1",
+                "workspai": ">=0.55.1",
                 "docker": "recommended"
             },
             "quickStart": {
@@ -360,7 +365,7 @@
             "requirements": {
                 "python": ">=3.10",
                 "node": ">=20",
-                "workspai": ">=0.43.1",
+                "workspai": ">=0.55.1",
                 "docker": "recommended"
             },
             "quickStart": {

@@ -21,3 +21,14 @@ Thumbs.db
 # IDEs
 .idea/
 .vscode/
+
+# Workspai machine-local workspace binding
+.workspai/workspace-link.local.json
+
+# Sensitive and generated local state
+.workspai/reports/
+.workspai/workspace-registry.v1.json
+*.pem
+*.key
+*.p12
+*.pfx

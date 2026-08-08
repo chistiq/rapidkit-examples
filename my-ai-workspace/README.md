@@ -5,7 +5,7 @@ implementations.
 
 - Medium: https://rapidkit.medium.com/build-your-first-ai-agent-with-rapidkit-in-10-minutes-f38a6a12088d
 - Dev.to: https://dev.to/rapidkit/build-your-first-ai-agent-with-rapidkit-in-10-minutes-3dj6
-- Source repository: https://github.com/rapidkitlabs/rapidkit-examples/tree/main/my-ai-workspace
+- Source repository: https://github.com/chistiq/rapidkit-examples/tree/main/my-ai-workspace
 - FastAPI project: [ai-agent](ai-agent/README.md)
 - NestJS project: [ai-agent-nest](ai-agent-nest/README.md)
 
@@ -24,6 +24,14 @@ npx workspai workspace contract inspect
 npx workspai workspace contract verify --strict --json
 npx workspai workspace model --json --write
 npx workspai doctor workspace --json
+npx workspai workspace intelligence run --for-agent generic --strict --json
+```
+
+`hydrate:core` uses the Core restore contract when the pinned engine supports
+it:
+
+```bash
+rapidkit modules restore --locked --ci
 ```
 
 The first sync registers this workspace on the current machine and discovers
@@ -42,6 +50,14 @@ npx workspai workspace sync
 
 Complete baseline, diff, impact, verify, agent context, agent-sync, explain, and
 CI workflow: [Workspace onboarding](../WORKSPACE_ONBOARDING.md).
+
+## AI and IDE entry points
+
+Start with `AGENTS.md` for the workspace-wide view and each project's own
+`AGENTS.md` for a bounded project lens. Copilot uses
+`.github/copilot-instructions.md`; Claude and Cursor use `CLAUDE.md`,
+`.claude/`, and `.cursor/`. Run the canonical intelligence command above after
+clone to refresh current evidence before relying on health or release claims.
 
 ## Quick Start (FastAPI)
 

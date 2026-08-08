@@ -38,7 +38,7 @@
     "src/health/__init__.py": {
       "hash": "23d1cb67aa2c34de63e89ea5a679af5c885246c110763152a13af3e96a709488",
       "module": "users_core",
-      "version": "0.1.13"
+      "version": "0.1.15"
     },
     "src/health/auth-core.health.ts": {
       "hash": "acd458b049fb28a3e5d02e1a013d36caec4c5a4ef2a0a19df6a0ef1d72270d2e",
@@ -76,9 +76,9 @@
       "version": "0.1.10"
     },
     "src/health/oauth.py": {
-      "hash": "ddc35bb852bef3d05dd5a71737db9d7c06c8124d932fe0b0809e5bc99c513c3e",
+      "hash": "8638d5cb02a6435287349c0a8233bf2461c8de4ee49bf4975a44ec68326924cb",
       "module": "oauth",
-      "version": "0.1.16"
+      "version": "0.1.18"
     },
     "src/health/postgres-health.controller.ts": {
       "hash": "720e6f6997ccf06f19c6fd369e45f60a06761a83299c8f47378e4ce95cee1652",
@@ -136,9 +136,9 @@
       "version": "0.1.9"
     },
     "src/health/users_core.py": {
-      "hash": "392884d3a8f70b3279965b9d1fe4b297814681cc024b055f8b666ab21b66085f",
+      "hash": "ec3f046470b4d454c64755074ba27c89f1495679690bcaa1e9847b9cfcd82c16",
       "module": "users_core",
-      "version": "0.1.13"
+      "version": "0.1.15"
     },
     "src/modules/free/auth/core/auth-core.controller.ts": {
       "hash": "124925c204869f90b1b5b0f51ad7a680020c8d44e97c5153e73aff7751b298d6",
@@ -206,9 +206,9 @@
       "version": "0.1.10"
     },
     "src/modules/free/auth/oauth/oauth.service.ts": {
-      "hash": "38dd5c9e6e5cb55756076f544894877123d46a8b03d3fb74957883c113730fde",
+      "hash": "012f86e8063d493a15a5b3cdfe01175af8d0ad6c4a3970252863448f47c7cc5a",
       "module": "oauth",
-      "version": "0.1.16"
+      "version": "0.1.18"
     },
     "src/modules/free/cache/redis/configuration.ts": {
       "hash": "6920c9a501ee2c4ca0c437872a7365dc4aaf7b302a83a26e3adc01adc7c840dd",
@@ -231,9 +231,9 @@
       "version": "0.1.17"
     },
     "src/modules/free/cache/redis/redis.service.ts": {
-      "hash": "ec6eb387e7c0576fe7bf5430fccb98377b6ba30d3a1a2cb1e9976f937998ba14",
+      "hash": "35aa1e1097d3ee110ca0407738782c037eaa005656dbd7e8c1409fff48426c1e",
       "module": "redis",
-      "version": "0.1.23"
+      "version": "0.1.25"
     },
     "src/modules/free/cache/redis/redis.validation.ts": {
       "hash": "8034eb114242664d3fe02bc25c03ed3600a5a7d59ff807975bdb643f0d8f6729",
@@ -251,9 +251,9 @@
       "version": "0.1.28"
     },
     "src/modules/free/database/db_postgres/postgres.service.ts": {
-      "hash": "25a583fb3f30e69f6ac3b3a7cbcbdd155d8ae3b4339c1c537a2789dd68a12df9",
+      "hash": "3f0bd063eddf7d1749b8492c2a6c926b5feb3b188a45e745ceb78d64e64becfa",
       "module": "db_postgres",
-      "version": "0.1.31"
+      "version": "0.1.33"
     },
     "src/modules/free/essentials/deployment/deployment.configuration.ts": {
       "hash": "744e2ad6e7c12d6abb79bf0b27feb0931fad8af684a1dfd3daecf13c74cb438c",
@@ -271,9 +271,9 @@
       "version": "0.1.10"
     },
     "src/modules/free/essentials/deployment/deployment.service.ts": {
-      "hash": "0ef12cd7a437799c3ae220815ecea433026599d5e2109d502cb239aa7795c443",
+      "hash": "82d41a0883c0bfce85f6df69b027526ba181e981395061aa1ec39635eba1495c",
       "module": "deployment",
-      "version": "0.1.13"
+      "version": "0.1.16"
     },
     "src/modules/free/essentials/logging/configuration.ts": {
       "hash": "4da6191cfb6117b448f0d962eb0d5285f2384f44d97e5dca6698ea2ca1339e15",
@@ -301,9 +301,9 @@
       "version": "0.1.9"
     },
     "src/modules/free/essentials/logging/logging.service.ts": {
-      "hash": "b6b1a102db9707bf631430baf0eadf7548d3f00afa3fe524a477b28eb885d04f",
+      "hash": "533c1d61af99dc4a0506d5081c39d3bc7bfd33278f1177d4ec76576b8e3b0ea5",
       "module": "logging",
-      "version": "0.1.13"
+      "version": "0.1.17"
     },
     "src/modules/free/essentials/logging/validation.ts": {
       "hash": "1ae4efea61c6ad6c10adefea4fe015e243256ca2f7c82cb1cbe1c671e3f2bd9d",
@@ -326,9 +326,9 @@
       "version": "0.1.20"
     },
     "src/modules/free/essentials/middleware/service.ts": {
-      "hash": "ca446d53811cdf3bce5696b0b74c5d2ec6c1b79ccdc0d9ad0f9c7e0808349b12",
+      "hash": "0ef4d07898311d707bd8da65a8a9ae74661e71258cd5a556925b27fbeca19d76",
       "module": "middleware",
-      "version": "0.1.24"
+      "version": "0.1.26"
     },
     "src/modules/free/essentials/settings/configuration.ts": {
       "hash": "8d97767834fcfe978c11597fff349aba5a24d5c8cda26d508f031af23e65bc95",

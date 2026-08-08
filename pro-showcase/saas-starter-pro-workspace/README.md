@@ -30,7 +30,7 @@ Teams building SaaS backends that need a faster path to:
 Use the public SaaS Starter Workspace first:
 
 ```bash
-git clone https://github.com/rapidkitlabs/rapidkit-examples.git
+git clone https://github.com/chistiq/rapidkit-examples.git
 cd rapidkit-examples/saas-starter-workspace
 npx workspai doctor workspace
 ```

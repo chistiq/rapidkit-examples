@@ -1,0 +1,22 @@
+# Artifact Map
+
+- `.workspai/reports/workspace-context-agent.json` — Agent context pack
+- `.workspai/reports/workspace-skills-index.json` — Operational skills index
+- `.workspai/reports/workspace-model.json` — Workspace model
+- `.workspai/reports/workspace-knowledge-graph.json` — Workspace knowledge graph
+- `.workspai/reports/workspace-intelligence-evaluation-last-run.json` — Workspace Intelligence evaluation
+- `.workspai/reports/doctor-last-run.json` — Workspace doctor
+- `.workspai/reports/doctor-project-last-run.json` — Project doctor
+- `.workspai/reports/doctor-remediation-plan-last-run.json` — Doctor remediation plan
+- `.workspai/reports/artifact-remediation-plan-last-run.json` — Artifact remediation plan
+- `.workspai/reports/doctor-fix-result-last-run.json` — Doctor fix result
+- `.workspai/reports/analyze-last-run.json` — Workspace analyze
+- `.workspai/reports/pipeline-last-run.json` — Governance pipeline
+- `.workspai/reports/release-readiness-last-run.json` — Release readiness
+- `.workspai/reports/workspace-impact-last-run.json` — Workspace impact
+- `.workspai/reports/workspace-verify-last-run.json` — Workspace verify
+- `.workspai/reports/workspace-model-snapshot.json` — Workspace model snapshot
+- `.workspai/reports/workspace-model-diff-last-run.json` — Workspace model diff
+- `.workspai/reports/workspace-explain-last-run.json` — Workspace explain
+- `.workspai/reports/workspace-contract-verify-last-run.json` — Workspace contract verify
+- `.workspai/reports/workspace-intelligence-history.json` — Workspace intelligence history

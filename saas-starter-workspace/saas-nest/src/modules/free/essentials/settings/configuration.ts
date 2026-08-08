@@ -5,7 +5,7 @@ import { registerAs } from "@nestjs/config";
 
 const VENDOR_ROOT_ENV = "RAPIDKIT_VENDOR_ROOT";
 const VENDOR_MODULE = "settings";
-const VENDOR_VERSION = "0.1.45";
+const VENDOR_VERSION = "0.1.48";
 const VENDOR_CONFIGURATION_RELATIVE = "nestjs/configuration.js";
 const SETTINGS_NAMESPACE = "settings";
 

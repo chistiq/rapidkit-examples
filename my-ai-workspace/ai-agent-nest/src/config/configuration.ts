@@ -8,7 +8,7 @@ import { registerAs } from '@nestjs/config';
 // src/.rapidkit and makes generated projects robust and portable.
 const VENDOR_ROOT_ENV = 'RAPIDKIT_VENDOR_ROOT';
 const VENDOR_MODULE = 'settings';
-const VENDOR_VERSION = '0.1.45';
+const VENDOR_VERSION = '0.1.48';
 const VENDOR_CONFIGURATION_RELATIVE = 'src/config/configuration';
 
 function resolveVendorRoot(): string {

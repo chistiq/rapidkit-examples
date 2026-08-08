@@ -94,7 +94,7 @@ type MiddlewareVendorConfiguration = {
 };
 
 const VENDOR_MODULE = 'middleware';
-const VENDOR_VERSION = '0.1.24';
+const VENDOR_VERSION = '0.1.26';
 
 const DEFAULT_CONFIG: MiddlewareConfig = {
   enabled: true,
@@ -148,7 +148,7 @@ function resolveVendorModule(): VendorModule | null {
     path.join(
       resolveVendorRoot(),
       'middleware',
-      '0.1.24',
+      '0.1.26',
       'middleware',
       'nestjs',
       'configuration.js',

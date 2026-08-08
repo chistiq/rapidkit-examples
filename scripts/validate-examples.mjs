@@ -10,8 +10,28 @@ const trackedFiles = process.argv.includes('--tracked-stdin')
 
 if (trackedFiles) {
   for (const relativePath of trackedFiles) {
-    if (/\/.rapidkit\/(?:vendor|snapshots|audit|reports|tmp)\//.test(relativePath)) {
+    const portablePath = relativePath.replaceAll('\\', '/');
+    if (/\/.rapidkit\/(?:vendor|snapshots|audit|reports|tmp)\//.test(portablePath)) {
       failures.push(`Generated RapidKit state must not be published: ${relativePath}`);
+    }
+    if (/(?:^|\/)\.(?:venv)(?:\/|$)|(?:^|\/)node_modules(?:\/|$)/.test(portablePath)) {
+      failures.push(`Installed dependency state must not be published: ${relativePath}`);
+    }
+    if (/(?:^|\/)\.workspai\/reports(?:\/|$)/.test(portablePath)) {
+      failures.push(`Generated Workspai evidence must not be published: ${relativePath}`);
+    }
+    if (
+      /(?:^|\/)\.workspai\/(?:workspace-registry\.v1\.json|workspace-link\.local\.json)$/.test(
+        portablePath
+      )
+    ) {
+      failures.push(`Machine-local Workspai binding must not be published: ${relativePath}`);
+    }
+    if (/(?:^|\/)\.env(?:\.(?:local|backup|secret))?$/.test(portablePath)) {
+      failures.push(`Populated environment file must not be published: ${relativePath}`);
+    }
+    if (/\.(?:pem|key|p12|pfx|jks|keystore)$/i.test(portablePath)) {
+      failures.push(`Private key or trust-store file must not be published: ${relativePath}`);
     }
   }
 }
@@ -27,12 +47,34 @@ function requireFile(relativePath) {
 }
 
 const index = readJson('examples.json');
+const packageManifest = readJson('package.json');
 requireFile('PUBLICATION_CONTRACT.md');
 requireFile('WORKSPACE_ONBOARDING.md');
 requireFile('scripts/hydrate-core-modules.mjs');
 requireFile('.github/workflows/examples-integrity.yml');
 if (index.schemaVersion !== 'workspai.examples-index.v1') {
   failures.push(`Unexpected examples schema: ${index.schemaVersion}`);
+}
+
+const workspaiCliVersion = '0.55.1';
+if (index.version !== packageManifest.version) {
+  failures.push(
+    `Catalog/package version drift (catalog ${index.version}, package ${packageManifest.version}).`
+  );
+}
+if (index.repository !== 'https://github.com/chistiq/rapidkit-examples') {
+  failures.push(`Unexpected examples repository: ${index.repository}`);
+}
+if (index.validationBaseline?.workspai !== workspaiCliVersion) {
+  failures.push(
+    `Workspai validation baseline drift (expected ${workspaiCliVersion}, got ${index.validationBaseline?.workspai ?? 'missing'}).`
+  );
+}
+if (
+  index.validationBaseline?.canonicalIntelligenceCommand !==
+  'workspai workspace intelligence run --for-agent generic --strict --json'
+) {
+  failures.push('Catalog lacks the canonical Workspace Intelligence runner contract.');
 }
 
 const rootReadme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
@@ -52,7 +94,22 @@ for (const requirement of positioningRequirements) {
 
 const published = index.workspaces.filter((workspace) => workspace.lifecycleStatus === 'published');
 const portableFiles = [];
-const rapidkitCoreVersion = '0.5.5';
+const rapidkitCoreVersion = '0.6.0';
+const requiredWorkspaceConsumerOutputs = [
+  'AGENTS.md',
+  'CLAUDE.md',
+  '.workspai/AGENT-GROUNDING.md',
+  '.workspai/skills/workspai-diagnose-api-failure.md',
+  '.workspai/skills/workspai-release-readiness.md',
+  '.workspai/skills/workspai-safe-schema-migration.md',
+  '.workspai/skills/workspai-dependency-upgrade.md',
+  '.workspai/skills/workspai-rename-contract.md',
+  '.github/copilot-instructions.md',
+  '.github/agents/workspai-advisor.agent.md',
+  '.github/skills/workspai-workspace-intelligence/SKILL.md',
+  '.cursor/rules/workspai-grounding.mdc',
+  '.claude/rules/workspai-evidence.md',
+];
 const pythonProjectBaseline = {
   fastapi: '^0.139.0',
   uvicorn: '^0.50.2',
@@ -107,6 +164,30 @@ function vendorModuleName(slug) {
   };
   return aliases[slug] ?? slug.split('/').at(-1);
 }
+
+function parseModuleLock(relativePath) {
+  const lockPath = path.join(root, relativePath);
+  if (!fs.existsSync(lockPath)) return null;
+
+  const lock = fs.readFileSync(lockPath, 'utf8');
+  const coreVersion = lock.match(/^core_version:\s*['"]?([^'"\n]+)['"]?/m)?.[1] ?? null;
+  const modules = new Map();
+  let currentSlug = null;
+
+  for (const line of lock.split(/\r?\n/)) {
+    const slugMatch = line.match(/^  ([^:\s][^:]*):\s*$/);
+    if (slugMatch) {
+      currentSlug = slugMatch[1];
+      continue;
+    }
+    const versionMatch = line.match(/^    version:\s*['"]?([^'"\n]+)['"]?/);
+    if (currentSlug && versionMatch) {
+      modules.set(currentSlug, versionMatch[1]);
+    }
+  }
+
+  return { coreVersion, modules };
+}
 const supportedProfiles = [
   'minimal',
   'java-only',
@@ -125,6 +206,10 @@ const workspaceOnboardingRequirements = [
     'strict workspace contract verification',
   ],
   ['npx workspai workspace model --json --write', 'canonical workspace model'],
+  [
+    'npx workspai workspace intelligence run --for-agent generic',
+    'canonical Workspace Intelligence runner',
+  ],
   ['WORKSPACE_ONBOARDING.md', 'complete workspace onboarding guide'],
 ];
 
@@ -143,11 +228,33 @@ function validateWorkspaceReadme(workspaceRoot, { requireHydration = false } = {
   if (requireHydration && !content.includes('npm run hydrate:core')) {
     failures.push(`Workspace README lacks RapidKit Core module hydration: ${readmePath}`);
   }
+  if (requireHydration && !content.includes('rapidkit modules restore --locked --ci')) {
+    failures.push(`Workspace README lacks direct RapidKit Core restore contract: ${readmePath}`);
+  }
+  for (const entrypoint of ['AGENTS.md', '.github/copilot-instructions.md']) {
+    if (!content.includes(entrypoint)) {
+      failures.push(`Workspace README lacks published consumer entry point ${entrypoint}: ${readmePath}`);
+    }
+  }
+}
+
+function requireWorkspaceConsumerOutputs(workspaceRoot) {
+  const outputs = requiredWorkspaceConsumerOutputs.map(
+    (relativePath) => `${workspaceRoot}/${relativePath}`
+  );
+  outputs.forEach(requireFile);
+  portableFiles.push(...outputs);
 }
 
 for (const workspace of published) {
   const workspaceRoot = workspace.path;
+  if (workspace.requirements?.workspai !== `>=${workspaiCliVersion}`) {
+    failures.push(
+      `Workspace CLI requirement drift (expected >=${workspaiCliVersion}): ${workspaceRoot}`
+    );
+  }
   validateWorkspaceReadme(workspaceRoot, { requireHydration: true });
+  requireWorkspaceConsumerOutputs(workspaceRoot);
   const rootPyprojectPath = `${workspaceRoot}/pyproject.toml`;
   const rootLockPath = `${workspaceRoot}/poetry.lock`;
   requireFile(rootPyprojectPath);
@@ -218,6 +325,11 @@ for (const workspace of published) {
   }
 
   for (const project of workspace.projects) {
+    for (const relativePath of ['AGENTS.md', '.workspai/PROJECT-GROUNDING.md']) {
+      const consumerPath = `${project.path}/${relativePath}`;
+      requireFile(consumerPath);
+      portableFiles.push(consumerPath);
+    }
     requireFile(`${project.path}/.rapidkit/project.json`);
 
     const projectReadmePath = path.join(root, project.path, 'README.md');
@@ -277,9 +389,27 @@ for (const workspace of published) {
     }
 
     const registryPath = path.join(root, project.path, 'registry.json');
+    const moduleLockRelativePath = `${project.path}/.rapidkit/modules.lock.yaml`;
     requireFile(`${project.path}/registry.json`);
+    requireFile(moduleLockRelativePath);
     if (fs.existsSync(registryPath)) {
       const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+      const moduleLock = parseModuleLock(moduleLockRelativePath);
+      if (moduleLock) {
+        if (moduleLock.coreVersion !== rapidkitCoreVersion) {
+          failures.push(
+            `Module lock core_version drift (expected ${rapidkitCoreVersion}, got ${moduleLock.coreVersion}): ${moduleLockRelativePath}`
+          );
+        }
+        for (const module of registry.installed_modules ?? []) {
+          const lockedVersion = moduleLock.modules.get(module.slug);
+          if (lockedVersion !== module.version) {
+            failures.push(
+              `Module lock version drift (${module.slug}: registry ${module.version}, lock ${lockedVersion ?? 'missing'}): ${moduleLockRelativePath}`
+            );
+          }
+        }
+      }
       const installedByVendorName = new Map(
         (registry.installed_modules ?? []).map((module) => [
           vendorModuleName(module.slug),
@@ -307,25 +437,31 @@ for (const workspace of published) {
         }
       }
 
-      const settingsModule = (registry.installed_modules ?? []).find(
-        (module) => module.slug === 'free/essentials/settings'
-      );
-      if (settingsModule) {
-        for (const sourcePath of collectFiles(
-          path.join(root, project.path, 'src'),
-          (file) => file.endsWith('.ts')
-        )) {
-          const source = fs.readFileSync(sourcePath, 'utf8');
-          if (!source.includes('vendor/settings')) continue;
-          const versionMatches = [
-            ...source.matchAll(/(?:DEFAULT_)?VENDOR_VERSION\s*=\s*['"]([^'"]+)['"]/g),
-          ];
-          for (const versionMatch of versionMatches) {
-            if (versionMatch[1] !== settingsModule.version) {
-              failures.push(
-                `TypeScript settings vendor drift (registry ${settingsModule.version}, wrapper ${versionMatch[1]}): ${path.relative(root, sourcePath)}`
-              );
-            }
+      for (const sourcePath of collectFiles(
+        path.join(root, project.path, 'src'),
+        (file) => file.endsWith('.ts')
+      )) {
+        const source = fs.readFileSync(sourcePath, 'utf8');
+        const moduleMatch = source.match(
+          /(?:DEFAULT_)?VENDOR_MODULE\s*=\s*['"]([^'"]+)['"]/
+        );
+        if (!moduleMatch) continue;
+
+        const installed = installedByVendorName.get(moduleMatch[1]);
+        const relativeSource = path.relative(root, sourcePath);
+        if (!installed) {
+          failures.push(`TypeScript vendor wrapper has no installed module: ${relativeSource}`);
+          continue;
+        }
+
+        const versionMatches = [
+          ...source.matchAll(/(?:DEFAULT_)?VENDOR_VERSION\s*=\s*['"]([^'"]+)['"]/g),
+        ];
+        for (const versionMatch of versionMatches) {
+          if (versionMatch[1] !== installed.version) {
+            failures.push(
+              `TypeScript vendor version drift (${moduleMatch[1]}: registry ${installed.version}, wrapper ${versionMatch[1]}): ${relativeSource}`
+            );
           }
         }
       }
@@ -336,7 +472,11 @@ for (const workspace of published) {
     if (fs.existsSync(snippetRegistryPath)) {
       const snippetRegistry = JSON.parse(fs.readFileSync(snippetRegistryPath, 'utf8'));
       for (const [key, snippet] of Object.entries(snippetRegistry.snippets ?? {})) {
-        if (snippet.status === 'failed' || snippet.status === 'pending') {
+        const idempotentlyPresent =
+          snippet.status === 'failed' &&
+          typeof snippet.last_error === 'string' &&
+          snippet.last_error.startsWith('already present in ');
+        if (snippet.status === 'pending' || (snippet.status === 'failed' && !idempotentlyPresent)) {
           failures.push(
             `Unresolved snippet state (${snippet.status}): ${project.path}/${key}`
           );
@@ -384,6 +524,7 @@ if (JSON.stringify(indexedProfiles) !== JSON.stringify([...supportedProfiles].so
 for (const fixture of profileFixtures) {
   const workspaceRoot = fixture.path;
   validateWorkspaceReadme(workspaceRoot);
+  requireWorkspaceConsumerOutputs(workspaceRoot);
   const required = [
     `${workspaceRoot}/.workspai-workspace`,
     `${workspaceRoot}/.workspai/workspace.json`,
@@ -436,10 +577,12 @@ if (fs.existsSync(onboardingPath)) {
   }
   const requiredOnboardingCommands = [
     'npm run hydrate:core',
+    'rapidkit modules restore --locked --ci',
     'npx workspai workspace foundation ensure',
     'npx workspai import ../existing-project --workspace . --json',
     'npx workspai adopt ../existing-project --workspace . --dry-run --json',
     'npx workspai workspace model --json --write',
+    'npx workspai workspace intelligence run --for-agent generic --strict --json',
     'npx workspai workspace snapshot --json',
     'npx workspai workspace diff',
     'npx workspai workspace impact',
@@ -451,6 +594,12 @@ if (fs.existsSync(onboardingPath)) {
     'npx workspai workspace context --for-agent --json --write --no-agent-sync',
     'npx workspai workspace agent-sync --write --json --preset enterprise',
     'npx workspai workspace explain release-blocked --json --write',
+    'npx workspai workspace repair capabilities --json',
+    'npx workspai workspace repair plan --card doctor --project <project-name> --json',
+    'npx workspai workspace repair approve',
+    'npx workspai workspace repair execute',
+    'npx workspai workspace repair status',
+    'npx workspai workspace repair rollback',
     'npx workspai pipeline --json --strict',
   ];
   for (const command of requiredOnboardingCommands) {
@@ -494,6 +643,17 @@ for (const showcase of index.proShowcases) {
 }
 
 const requiredIgnoreRules = [
+  '**/.venv/',
+  '**/node_modules/',
+  '**/.env',
+  '**/.env.*',
+  '!**/.env.example',
+  '!**/.env.dev',
+  '!**/.env.prod',
+  '**/*.pem',
+  '**/*.key',
+  '**/*.p12',
+  '**/*.pfx',
   '**/.rapidkit/vendor/',
   '**/.rapidkit/snapshots/',
   '**/.rapidkit/audit/',
@@ -504,6 +664,7 @@ const requiredIgnoreRules = [
   '**/.workspai/imported-projects.json',
   '**/.workspai/adopt.json',
   '**/.workspai/adopt-readiness.json',
+  '**/.workspai/workspace-link.local.json',
 ];
 const gitignore = fs.readFileSync(path.join(root, '.gitignore'), 'utf8');
 for (const rule of requiredIgnoreRules) {
@@ -512,10 +673,71 @@ for (const rule of requiredIgnoreRules) {
   }
 }
 
+const workspaceIgnoreRules = [
+  '**/.env.*',
+  '!**/.env.example',
+  '**/.venv/',
+  '**/node_modules/',
+  '**/.workspai/reports/',
+  '**/.workspai/workspace-registry.v1.json',
+  '**/.workspai/workspace-link.local.json',
+  '**/*.pem',
+  '**/*.key',
+];
+const workspaceRoots = fs
+  .readdirSync(root, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && entry.name.endsWith('-workspace'))
+  .map((entry) => entry.name);
+for (const workspaceRoot of workspaceRoots) {
+  const ignorePath = `${workspaceRoot}/.gitignore`;
+  requireFile(ignorePath);
+  const absolutePath = path.join(root, ignorePath);
+  if (!fs.existsSync(absolutePath)) continue;
+  const rules = fs.readFileSync(absolutePath, 'utf8').split(/\r?\n/);
+  for (const rule of workspaceIgnoreRules) {
+    if (!rules.includes(rule)) {
+      failures.push(`Workspace ignore boundary lacks ${rule}: ${ignorePath}`);
+    }
+  }
+}
+
+const projectIgnoreRules = [
+  '.env.*',
+  '!.env.example',
+  '.workspai/reports/',
+  '.workspai/workspace-registry.v1.json',
+  '.workspai/workspace-link.local.json',
+  '*.pem',
+  '*.key',
+];
+for (const workspace of published) {
+  for (const project of workspace.projects) {
+    const ignorePath = `${project.path}/.gitignore`;
+    requireFile(ignorePath);
+    const absolutePath = path.join(root, ignorePath);
+    if (!fs.existsSync(absolutePath)) continue;
+    const rules = fs.readFileSync(absolutePath, 'utf8').split(/\r?\n/);
+    for (const rule of projectIgnoreRules) {
+      if (!rules.includes(rule)) {
+        failures.push(`Project ignore boundary lacks ${rule}: ${ignorePath}`);
+      }
+    }
+  }
+}
+
 const workflowPath = path.join(root, '.github/workflows/examples-integrity.yml');
 if (fs.existsSync(workflowPath)) {
   const workflow = fs.readFileSync(workflowPath, 'utf8');
-  for (const requirement of ['Restore RapidKit Core module payloads', 'npm run hydrate:core']) {
+  for (const requirement of [
+    'Restore RapidKit Core module payloads',
+    'npm run hydrate:core',
+    'rapidkit modules restore --locked --ci',
+    'WORKSPAI_VERSION: 0.55.1',
+    'RAPIDKIT_CORE_VERSION: 0.6.0',
+    'npm install --global "workspai@${WORKSPAI_VERSION}"',
+    'Verify RapidKit Core community baseline',
+    'workspai workspace intelligence run --for-agent generic --json',
+  ]) {
     if (!workflow.includes(requirement)) {
       failures.push(`Examples CI lacks required hydration step: ${requirement}`);
     }
@@ -525,7 +747,15 @@ if (fs.existsSync(workflowPath)) {
 function collectMarkdown(directory, relativeDirectory = '') {
   const docs = [];
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-    if (entry.name === '.git' || entry.name === 'node_modules') continue;
+    if (
+      entry.name === '.git' ||
+      entry.name === '.venv' ||
+      entry.name === 'node_modules' ||
+      entry.name === 'vendor' ||
+      (entry.name === 'reports' && path.basename(directory) === '.workspai')
+    ) {
+      continue;
+    }
     const relativePath = path.join(relativeDirectory, entry.name);
     const absolutePath = path.join(directory, entry.name);
     if (entry.isDirectory()) docs.push(...collectMarkdown(absolutePath, relativePath));
@@ -539,6 +769,7 @@ const stalePatterns = [
   { pattern: /\bnpx rapidkit\b/, label: 'legacy npm command' },
   { pattern: /npmjs\.com\/package\/rapidkit(?:\b|\/)/, label: 'legacy npm package link' },
   { pattern: /github\.com\/rapidkitlabs\/rapidkit-npm(?:\b|\/)/, label: 'legacy CLI repository link' },
+  { pattern: /github\.com\/rapidkitlabs\//, label: 'legacy GitHub organization link' },
   { pattern: /docs\.getrapidkit\.com/, label: 'retired documentation host' },
   { pattern: /RapidKit CLI/, label: 'legacy CLI naming' },
   { pattern: /Health:\s*100%/, label: 'non-evidence health claim' },
@@ -549,6 +780,7 @@ const stalePatterns = [
   },
 ];
 for (const relativePath of docs) {
+  if (trackedFiles && !trackedFiles.has(relativePath)) continue;
   const content = fs.readFileSync(path.join(root, relativePath), 'utf8');
   for (const { pattern, label } of stalePatterns) {
     if (pattern.test(content)) failures.push(`${label} in ${relativePath}`);
@@ -589,7 +821,25 @@ function collectPublicSourceFiles(directory, relativeDirectory = '') {
   return files;
 }
 
-for (const relativePath of collectPublicSourceFiles(root)) {
+const publicationFiles = trackedFiles
+  ? [...trackedFiles]
+  : collectPublicSourceFiles(root);
+const highConfidenceSecretPatterns = [
+  ['private key', /-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----/],
+  ['AWS access key', /\b(?:AKIA|ASIA)[A-Z0-9]{16}\b/],
+  ['GitHub token', /\bgh[pousr]_[A-Za-z0-9]{30,}\b/],
+  ['OpenAI API key', /\bsk-(?:proj-)?[A-Za-z0-9_-]{20,}\b/],
+  ['Slack token', /\bxox[baprs]-[A-Za-z0-9-]{20,}\b/],
+  ['Stripe live key', /\b[rs]k_live_[A-Za-z0-9]{16,}\b/],
+];
+const machineLocalPathPatterns = [
+  /(?:^|[^A-Za-z0-9_])\/home\/[A-Za-z0-9._-]+\//,
+  /\/Users\/[A-Za-z0-9._-]+\//,
+  /[A-Za-z]:\\Users\\[^\\]+\\/,
+  /(?:RUNNER~1|runneradmin|AppData[\\/]Local[\\/]Temp)/i,
+];
+
+for (const relativePath of publicationFiles) {
   const baseName = path.basename(relativePath);
   if (baseName === '.env.local' || baseName === '.env.backup') {
     failures.push(`Machine-local environment artifact must not be published: ${relativePath}`);
@@ -599,9 +849,26 @@ for (const relativePath of collectPublicSourceFiles(root)) {
     failures.push(`Secret-bearing file type must not be published: ${relativePath}`);
     continue;
   }
-  if (!/\.(?:ts|js|mjs|cjs)$/.test(relativePath)) continue;
   const content = fs.readFileSync(path.join(root, relativePath), 'utf8');
-  if (/SECRET_KEY:\s*process\.env\.SECRET_KEY\s*\?\?\s*['"][A-Za-z0-9]{24,}['"]/.test(content)) {
+  if (content.includes('\0')) continue;
+
+  if (relativePath !== 'scripts/validate-examples.mjs') {
+    for (const pattern of machineLocalPathPatterns) {
+      if (pattern.test(content)) {
+        failures.push(`Machine-local absolute path in tracked file: ${relativePath}`);
+        break;
+      }
+    }
+  }
+  for (const [label, pattern] of highConfidenceSecretPatterns) {
+    if (pattern.test(content)) {
+      failures.push(`Potential ${label} in tracked file: ${relativePath}`);
+    }
+  }
+  if (
+    /\.(?:ts|js|mjs|cjs)$/.test(relativePath) &&
+    /SECRET_KEY:\s*process\.env\.SECRET_KEY\s*\?\?\s*['"][A-Za-z0-9]{24,}['"]/.test(content)
+  ) {
     failures.push(`Secret-looking hardcoded fallback in ${relativePath}`);
   }
 }

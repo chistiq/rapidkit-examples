@@ -39,6 +39,15 @@ function run(command, commandArgs, options = {}) {
   return (result.stdout ?? '').trim();
 }
 
+function canUseModulesRestore() {
+  const result = spawnSync(rapidkit, ['modules', 'restore', '--help'], {
+    cwd: workspace,
+    encoding: 'utf8',
+    stdio: 'pipe',
+  });
+  return result.status === 0 && (result.stdout ?? '').includes('modules.lock');
+}
+
 run('poetry', ['--directory', workspace, 'install', '--no-interaction']);
 const environment = path.join(workspace, '.venv');
 const rapidkit = path.join(
@@ -55,10 +64,13 @@ const aliases = new Map([
   ['free/auth/core', 'auth_core'],
   ['free/observability/core', 'observability_core'],
 ]);
+const restoreAvailable = canUseModulesRestore();
+let usedRegistryFallback = false;
 
 for (const projectArg of projectArgs) {
   const project = path.resolve(workspace, projectArg);
   const registryPath = path.join(project, 'registry.json');
+  const lockPath = path.join(project, '.rapidkit', 'modules.lock.yaml');
   if (!fs.existsSync(registryPath)) throw new Error(`Module registry not found: ${registryPath}`);
 
   const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
@@ -79,16 +91,37 @@ for (const projectArg of projectArgs) {
     });
 
     console.log(`[hydrate] ${path.relative(root, project)}: ${modules.length} module(s)`);
-    for (const module of modules) {
-      if (!module.slug || !module.version) {
-        throw new Error(`Invalid module registry entry in ${registryPath}`);
+    let restoredFromLock = false;
+    if (restoreAvailable && fs.existsSync(lockPath)) {
+      try {
+        run(
+          rapidkit,
+          ['modules', 'restore', '--locked', '--ci', '--path', temporaryProject],
+          { cwd: temporaryProject, capture: true }
+        );
+        restoredFromLock = true;
+      } catch {
+        usedRegistryFallback = true;
+        console.warn(
+          `[hydrate] Locked restore could not resolve ${path.relative(root, project)}; ` +
+            'falling back to registry replay with exact post-restore validation.'
+        );
       }
-      run(
-        rapidkit,
-        ['add', 'module', module.slug, '--update', '--with-deps', '--no-reconcile'],
-        { cwd: temporaryProject }
-      );
+    }
+    if (!restoredFromLock) {
+      for (const module of modules) {
+        if (!module.slug || !module.version) {
+          throw new Error(`Invalid module registry entry in ${registryPath}`);
+        }
+        run(
+          rapidkit,
+          ['add', 'module', module.slug, '--update', '--with-deps', '--no-reconcile'],
+          { cwd: temporaryProject }
+        );
+      }
+    }
 
+    for (const module of modules) {
       const vendorName = aliases.get(module.slug) ?? module.slug.split('/').at(-1);
       const payload = path.join(
         temporaryProject,
@@ -122,4 +155,8 @@ for (const projectArg of projectArgs) {
   }
 }
 
-console.log('[hydrate] RapidKit Core module payloads restored from project registries.');
+console.log(
+  restoreAvailable && !usedRegistryFallback
+    ? '[hydrate] RapidKit Core module payloads restored from project registries and locks.'
+    : '[hydrate] RapidKit Core module payloads restored from registries with exact version validation.'
+);

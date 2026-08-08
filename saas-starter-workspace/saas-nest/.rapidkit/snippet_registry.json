@@ -6,7 +6,7 @@
       "priority": 10,
       "file": ".env",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:08.221454+00:00",
+      "last_attempt_at": "2026-08-08T21:42:03.210953+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "nestjs/standard",
@@ -20,7 +20,7 @@
           ],
           "file_path": "logs/app.log",
           "async_queue": true,
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -58,7 +58,7 @@
           },
           "LOG_SAMPLING_RATE": {
             "type": "number",
-            "default": 1,
+            "default": 1.0,
             "description": "Sampling rate for verbose loggers"
           },
           "LOG_ENABLE_REDACTION": {
@@ -81,15 +81,15 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:08.221454+00:00"
+      "applied_at": "2026-08-08T21:42:03.210953+00:00"
     },
     "logging_env::.env.dev": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 10,
       "file": ".env.dev",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:08.230017+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:03.227115+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "nestjs/standard",
@@ -103,7 +103,7 @@
           ],
           "file_path": "logs/app.log",
           "async_queue": true,
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -141,7 +141,7 @@
           },
           "LOG_SAMPLING_RATE": {
             "type": "number",
-            "default": 1,
+            "default": 1.0,
             "description": "Sampling rate for verbose loggers"
           },
           "LOG_ENABLE_REDACTION": {
@@ -164,15 +164,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:08.230017+00:00"
+      "applied_at": "2026-07-12T17:43:08.230017+00:00",
+      "last_error": "already present in .env.dev"
     },
     "logging_env::.env.prod": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 10,
       "file": ".env.prod",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:08.240251+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:03.237610+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "nestjs/standard",
@@ -186,7 +187,7 @@
           ],
           "file_path": "logs/app.log",
           "async_queue": true,
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -224,7 +225,7 @@
           },
           "LOG_SAMPLING_RATE": {
             "type": "number",
-            "default": 1,
+            "default": 1.0,
             "description": "Sampling rate for verbose loggers"
           },
           "LOG_ENABLE_REDACTION": {
@@ -247,7 +248,8 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:08.240251+00:00"
+      "applied_at": "2026-07-12T17:43:08.240251+00:00",
+      "last_error": "already present in .env.prod"
     },
     "logging_env::.env.example": {
       "anchor": "# <<<inject:module-env>>>",
@@ -255,7 +257,7 @@
       "priority": 10,
       "file": ".env.example",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:50:00.848443+00:00",
+      "last_attempt_at": "2026-08-08T21:42:03.246252+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "nestjs/standard",
@@ -269,7 +271,7 @@
           ],
           "file_path": "logs/app.log",
           "async_queue": true,
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -307,7 +309,7 @@
           },
           "LOG_SAMPLING_RATE": {
             "type": "number",
-            "default": 1,
+            "default": 1.0,
             "description": "Sampling rate for verbose loggers"
           },
           "LOG_ENABLE_REDACTION": {
@@ -330,15 +332,15 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:50:00.848443+00:00"
+      "applied_at": "2026-08-08T21:42:03.246252+00:00"
     },
     "logging_settings_fields_nestjs::configuration.ts": {
       "anchor": "// <<<inject:settings-fields>>>",
       "version": "1.0.0",
       "priority": 20,
       "file": "src/modules/free/essentials/settings/configuration.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:08.256419+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:03.252354+00:00",
       "template": "logging_fields_nestjs.snippet.j2",
       "module_slug": "free/essentials/logging",
       "profile": "nestjs/standard",
@@ -352,7 +354,7 @@
           ],
           "async_queue": true,
           "file_path": "logs/app.log",
-          "sampling_rate": 1,
+          "sampling_rate": 1.0,
           "enable_redaction": true,
           "healthcheck_enabled": true,
           "healthcheck_path": "/api/health/module/logging"
@@ -365,7 +367,8 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-02-15T20:32:14.754457+00:00"
+      "applied_at": "2026-02-15T20:32:14.754457+00:00",
+      "last_error": "already present in configuration.ts"
     },
     "auth_core_env::.env": {
       "anchor": "# <<<inject:module-env>>>",
@@ -373,7 +376,7 @@
       "priority": 10,
       "file": ".env",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:16.041745+00:00",
+      "last_attempt_at": "2026-08-08T21:42:08.757173+00:00",
       "template": "auth_env.snippet.j2",
       "module_slug": "free/auth/core",
       "profile": "nestjs/standard",
@@ -396,15 +399,15 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:16.041745+00:00"
+      "applied_at": "2026-08-08T21:42:08.757173+00:00"
     },
     "auth_core_env::.env.dev": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "0.1.0",
       "priority": 10,
       "file": ".env.dev",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:16.047087+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:08.762700+00:00",
       "template": "auth_env.snippet.j2",
       "module_slug": "free/auth/core",
       "profile": "nestjs/standard",
@@ -427,15 +430,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:16.047087+00:00"
+      "applied_at": "2026-07-12T17:43:16.047087+00:00",
+      "last_error": "already present in .env.dev"
     },
     "auth_core_env::.env.prod": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "0.1.0",
       "priority": 10,
       "file": ".env.prod",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:16.052470+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:08.767640+00:00",
       "template": "auth_env.snippet.j2",
       "module_slug": "free/auth/core",
       "profile": "nestjs/standard",
@@ -458,15 +462,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:16.052470+00:00"
+      "applied_at": "2026-07-12T17:43:16.052470+00:00",
+      "last_error": "already present in .env.prod"
     },
     "auth_core_env::.env.example": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "0.1.0",
       "priority": 10,
       "file": ".env.example",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:50:00.853949+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:08.772796+00:00",
       "template": "auth_env.snippet.j2",
       "module_slug": "free/auth/core",
       "profile": "nestjs/standard",
@@ -489,7 +494,8 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:50:00.853949+00:00"
+      "applied_at": "2026-07-12T17:50:00.853949+00:00",
+      "last_error": "already present in .env.example"
     },
     "auth_core_quickstart::README.md": {
       "anchor": "<!-- <<<inject:module-snippet>>> -->",
@@ -497,7 +503,7 @@
       "priority": 5,
       "file": "src/README.md",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:16.143106+00:00",
+      "last_attempt_at": "2026-08-08T21:42:08.848703+00:00",
       "template": "core.snippet.j2",
       "module_slug": "free/auth/core",
       "profile": "nestjs/standard",
@@ -509,7 +515,7 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:16.143106+00:00"
+      "applied_at": "2026-08-08T21:42:08.848703+00:00"
     },
     "oauth_env::.env": {
       "anchor": "# <<<inject:module-env>>>",
@@ -517,7 +523,7 @@
       "priority": 10,
       "file": ".env",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:18.262406+00:00",
+      "last_attempt_at": "2026-08-08T21:42:10.620774+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/auth/oauth",
       "profile": "nestjs/standard",
@@ -575,15 +581,15 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:18.262406+00:00"
+      "applied_at": "2026-08-08T21:42:10.620774+00:00"
     },
     "oauth_env::.env.dev": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "0.1.0",
       "priority": 10,
       "file": ".env.dev",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:18.271372+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:10.627876+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/auth/oauth",
       "profile": "nestjs/standard",
@@ -641,15 +647,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:18.271372+00:00"
+      "applied_at": "2026-07-12T17:43:18.271372+00:00",
+      "last_error": "already present in .env.dev"
     },
     "oauth_env::.env.prod": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "0.1.0",
       "priority": 10,
       "file": ".env.prod",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:18.279143+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:10.634508+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/auth/oauth",
       "profile": "nestjs/standard",
@@ -707,15 +714,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:18.279143+00:00"
+      "applied_at": "2026-07-12T17:43:18.279143+00:00",
+      "last_error": "already present in .env.prod"
     },
     "oauth_env::.env.example": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "0.1.0",
       "priority": 10,
       "file": ".env.example",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:50:00.861169+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:10.641414+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/auth/oauth",
       "profile": "nestjs/standard",
@@ -773,15 +781,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:50:00.861169+00:00"
+      "applied_at": "2026-07-12T17:50:00.861169+00:00",
+      "last_error": "already present in .env.example"
     },
     "oauth_settings_fields_nestjs::configuration.ts": {
       "anchor": "// <<<inject:configuration>>>",
       "version": "0.1.0",
       "priority": 20,
       "file": "src/config/configuration.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:18.301335+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:10.647354+00:00",
       "template": "settings_fields_nestjs.snippet.j2",
       "module_slug": "free/auth/oauth",
       "profile": "nestjs/standard",
@@ -793,7 +802,8 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-02-15T20:34:45.090533+00:00"
+      "applied_at": "2026-02-15T20:34:45.090533+00:00",
+      "last_error": "already present in configuration.ts"
     },
     "oauth_quickstart::README.md": {
       "anchor": "<!-- <<<inject:module-snippet>>> -->",
@@ -801,7 +811,7 @@
       "priority": 5,
       "file": "src/README.md",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:18.542221+00:00",
+      "last_attempt_at": "2026-08-08T21:42:10.720428+00:00",
       "template": "oauth.snippet.j2",
       "module_slug": "free/auth/oauth",
       "profile": "nestjs/standard",
@@ -813,7 +823,7 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:18.542221+00:00"
+      "applied_at": "2026-08-08T21:42:10.720428+00:00"
     },
     "security_headers_env::.env": {
       "anchor": "# <<<inject:module-env>>>",
@@ -821,7 +831,7 @@
       "priority": 15,
       "file": ".env",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:20.967312+00:00",
+      "last_attempt_at": "2026-08-08T21:42:12.476734+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/security/security_headers",
       "profile": "nestjs/standard",
@@ -913,15 +923,15 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:20.967312+00:00"
+      "applied_at": "2026-08-08T21:42:12.476734+00:00"
     },
     "security_headers_env::.env.dev": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 15,
       "file": ".env.dev",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:20.972031+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:12.481214+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/security/security_headers",
       "profile": "nestjs/standard",
@@ -1013,15 +1023,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:20.972031+00:00"
+      "applied_at": "2026-07-12T17:43:20.972031+00:00",
+      "last_error": "already present in .env.dev"
     },
     "security_headers_env::.env.prod": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 15,
       "file": ".env.prod",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:20.976601+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:12.486172+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/security/security_headers",
       "profile": "nestjs/standard",
@@ -1113,15 +1124,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:20.976601+00:00"
+      "applied_at": "2026-07-12T17:43:20.976601+00:00",
+      "last_error": "already present in .env.prod"
     },
     "security_headers_env::.env.example": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 15,
       "file": ".env.example",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:50:00.866427+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:12.490524+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/security/security_headers",
       "profile": "nestjs/standard",
@@ -1214,15 +1226,16 @@
       },
       "conflict_resolution": "merge",
       "applied_at": "2026-07-12T17:50:00.866427+00:00",
-      "context": {}
+      "context": {},
+      "last_error": "already present in .env.example"
     },
     "security_headers_quickstart::README.md": {
       "anchor": "<!-- <<<inject:module-snippet>>> -->",
       "version": "1.0.0",
       "priority": 10,
       "file": "src/README.md",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:20.986033+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:12.495873+00:00",
       "template": "security_headers.snippet.j2",
       "module_slug": "free/security/security_headers",
       "profile": "nestjs/standard",
@@ -1242,7 +1255,8 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-02-15T20:34:57.420813+00:00"
+      "applied_at": "2026-02-15T20:34:57.420813+00:00",
+      "last_error": "already present in README.md"
     },
     "db_postgres_env_defaults::.env": {
       "anchor": "# <<<inject:module-env>>>",
@@ -1250,7 +1264,7 @@
       "priority": 8,
       "file": ".env",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:22.945212+00:00",
+      "last_attempt_at": "2026-08-08T21:42:14.363384+00:00",
       "template": "db_postgres.snippet.j2",
       "module_slug": "free/database/db_postgres",
       "profile": "nestjs/standard",
@@ -1271,15 +1285,15 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:22.945212+00:00"
+      "applied_at": "2026-08-08T21:42:14.363384+00:00"
     },
     "db_postgres_env_defaults::.env.dev": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 8,
       "file": ".env.dev",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:22.949372+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:14.367733+00:00",
       "template": "db_postgres.snippet.j2",
       "module_slug": "free/database/db_postgres",
       "profile": "nestjs/standard",
@@ -1300,15 +1314,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:22.949372+00:00"
+      "applied_at": "2026-07-12T17:43:22.949372+00:00",
+      "last_error": "already present in .env.dev"
     },
     "db_postgres_env_defaults::.env.prod": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 8,
       "file": ".env.prod",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:22.953643+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:14.372614+00:00",
       "template": "db_postgres.snippet.j2",
       "module_slug": "free/database/db_postgres",
       "profile": "nestjs/standard",
@@ -1329,15 +1344,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:22.953643+00:00"
+      "applied_at": "2026-07-12T17:43:22.953643+00:00",
+      "last_error": "already present in .env.prod"
     },
     "db_postgres_env_defaults::.env.example": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 8,
       "file": ".env.example",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:50:00.871372+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:14.377006+00:00",
       "template": "db_postgres.snippet.j2",
       "module_slug": "free/database/db_postgres",
       "profile": "nestjs/standard",
@@ -1358,15 +1374,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:50:00.871372+00:00"
+      "applied_at": "2026-07-12T17:50:00.871372+00:00",
+      "last_error": "already present in .env.example"
     },
     "db_postgres_settings_fields_nestjs::configuration.ts": {
       "anchor": "// <<<inject:configuration>>>",
       "version": "1.0.0",
       "priority": 5,
       "file": "src/config/configuration.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:22.964242+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:14.383846+00:00",
       "template": "db_postgres_settings_fields_nestjs.snippet.j2",
       "module_slug": "free/database/db_postgres",
       "profile": "nestjs/standard",
@@ -1388,7 +1405,8 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-02-15T20:34:58.095556+00:00"
+      "applied_at": "2026-02-15T20:34:58.095556+00:00",
+      "last_error": "already present in configuration.ts"
     },
     "users_core_env::.env": {
       "anchor": "# <<<inject:module-env>>>",
@@ -1396,7 +1414,7 @@
       "priority": 15,
       "file": ".env",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:24.857956+00:00",
+      "last_attempt_at": "2026-08-08T21:42:16.212649+00:00",
       "template": "users_core.snippet.j2",
       "module_slug": "free/users/users_core",
       "profile": "nestjs/standard",
@@ -1422,15 +1440,15 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:24.857956+00:00"
+      "applied_at": "2026-08-08T21:42:16.212649+00:00"
     },
     "users_core_env::.env.example": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "0.1.0",
       "priority": 15,
       "file": ".env.example",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:50:00.881968+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:16.223119+00:00",
       "template": "users_core.snippet.j2",
       "module_slug": "free/users/users_core",
       "profile": "nestjs/standard",
@@ -1456,15 +1474,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:50:00.881968+00:00"
+      "applied_at": "2026-07-12T17:50:00.881968+00:00",
+      "last_error": "already present in .env.example"
     },
     "users_core_env::.env.dev": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "0.1.0",
       "priority": 15,
       "file": ".env.dev",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:24.878833+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:16.233803+00:00",
       "template": "users_core.snippet.j2",
       "module_slug": "free/users/users_core",
       "profile": "nestjs/standard",
@@ -1490,15 +1509,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:24.878833+00:00"
+      "applied_at": "2026-07-12T17:43:24.878833+00:00",
+      "last_error": "already present in .env.dev"
     },
     "users_core_env::.env.prod": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "0.1.0",
       "priority": 15,
       "file": ".env.prod",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:24.889276+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:16.244400+00:00",
       "template": "users_core.snippet.j2",
       "module_slug": "free/users/users_core",
       "profile": "nestjs/standard",
@@ -1524,7 +1544,8 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:24.889276+00:00"
+      "applied_at": "2026-07-12T17:43:24.889276+00:00",
+      "last_error": "already present in .env.prod"
     },
     "redis_env::.env": {
       "anchor": "# <<<inject:module-env>>>",
@@ -1532,7 +1553,7 @@
       "priority": 10,
       "file": ".env",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:26.923181+00:00",
+      "last_attempt_at": "2026-08-08T21:42:18.132930+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/cache/redis",
       "profile": "nestjs/standard",
@@ -1605,15 +1626,15 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:26.923181+00:00"
+      "applied_at": "2026-08-08T21:42:18.132930+00:00"
     },
     "redis_env::.env.dev": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 10,
       "file": ".env.dev",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:26.929810+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:18.140419+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/cache/redis",
       "profile": "nestjs/standard",
@@ -1686,15 +1707,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:26.929810+00:00"
+      "applied_at": "2026-07-12T17:43:26.929810+00:00",
+      "last_error": "already present in .env.dev"
     },
     "redis_env::.env.prod": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 10,
       "file": ".env.prod",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:26.937071+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:18.148654+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/cache/redis",
       "profile": "nestjs/standard",
@@ -1767,15 +1789,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:26.937071+00:00"
+      "applied_at": "2026-07-12T17:43:26.937071+00:00",
+      "last_error": "already present in .env.prod"
     },
     "redis_env::.env.example": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 10,
       "file": ".env.example",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:50:00.894222+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:18.155996+00:00",
       "template": "env.snippet.j2",
       "module_slug": "free/cache/redis",
       "profile": "nestjs/standard",
@@ -1848,15 +1871,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:50:00.894222+00:00"
+      "applied_at": "2026-07-12T17:50:00.894222+00:00",
+      "last_error": "already present in .env.example"
     },
     "redis_settings_fields_nestjs::configuration.ts": {
       "anchor": "// <<<inject:configuration>>>",
       "version": "1.0.0",
       "priority": 20,
       "file": "src/config/configuration.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:26.949437+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:18.162691+00:00",
       "template": "redis_fields_nestjs.snippet.j2",
       "module_slug": "free/cache/redis",
       "profile": "nestjs/standard",
@@ -1868,15 +1892,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-02-15T20:35:01.784538+00:00"
+      "applied_at": "2026-02-15T20:35:01.784538+00:00",
+      "last_error": "already present in configuration.ts"
     },
     "redis_quickstart::README.md": {
       "anchor": "<!-- <<<inject:module-snippet>>> -->",
       "version": "1.0.0",
       "priority": 5,
       "file": "src/README.md",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:27.025100+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:18.167607+00:00",
       "template": "redis.snippet.j2",
       "module_slug": "free/cache/redis",
       "profile": "nestjs/standard",
@@ -1887,15 +1912,16 @@
         "additionalProperties": true,
         "required": []
       },
-      "applied_at": "2026-07-12T17:43:27.025100+00:00"
+      "applied_at": "2026-07-12T17:43:27.025100+00:00",
+      "last_error": "already present in README.md"
     },
     "db_postgres_nestjs_module_registry::index.ts": {
       "anchor": "// <<<inject:module-exports>>>",
       "version": "1.0.0",
       "priority": 30,
       "file": "src/modules/index.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:23.024491+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:14.389461+00:00",
       "template": "db_postgres.nestjs.module_registry.snippet.j2",
       "module_slug": "free/database/db_postgres",
       "profile": "nestjs/standard",
@@ -1907,15 +1933,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:23.024491+00:00"
+      "applied_at": "2026-07-12T17:43:23.024491+00:00",
+      "last_error": "already present in index.ts"
     },
     "db_postgres_nestjs_health_registry::index.ts": {
       "anchor": "// <<<inject:module-exports>>>",
       "version": "1.0.0",
       "priority": 31,
       "file": "src/modules/index.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:23.031097+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:14.394953+00:00",
       "template": "db_postgres.nestjs.health_registry.snippet.j2",
       "module_slug": "free/database/db_postgres",
       "profile": "nestjs/standard",
@@ -1927,15 +1954,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:23.031097+00:00"
+      "applied_at": "2026-07-12T17:43:23.031097+00:00",
+      "last_error": "already present in index.ts"
     },
     "auth_core_nestjs_module_registry::index.ts": {
       "anchor": "// <<<inject:module-exports>>>",
       "version": "1.0.0",
       "priority": 30,
       "file": "src/modules/index.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:16.151331+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:08.854139+00:00",
       "template": "auth_core.nestjs.module_registry.snippet.j2",
       "module_slug": "free/auth/core",
       "profile": "nestjs/standard",
@@ -1947,15 +1975,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:16.151331+00:00"
+      "applied_at": "2026-07-12T17:43:16.151331+00:00",
+      "last_error": "already present in index.ts"
     },
     "oauth_nestjs_module_registry::index.ts": {
       "anchor": "// <<<inject:module-exports>>>",
       "version": "1.0.0",
       "priority": 30,
       "file": "src/modules/index.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:18.859318+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:10.725767+00:00",
       "template": "oauth.nestjs.module_registry.snippet.j2",
       "module_slug": "free/auth/oauth",
       "profile": "nestjs/standard",
@@ -1967,15 +1996,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:18.859318+00:00"
+      "applied_at": "2026-07-12T17:43:18.859318+00:00",
+      "last_error": "already present in index.ts"
     },
     "redis_nestjs_module_registry::index.ts": {
       "anchor": "// <<<inject:module-exports>>>",
       "version": "1.0.0",
       "priority": 30,
       "file": "src/modules/index.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:27.031236+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:18.172819+00:00",
       "template": "redis.nestjs.module_registry.snippet.j2",
       "module_slug": "free/cache/redis",
       "profile": "nestjs/standard",
@@ -1987,15 +2017,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:27.031236+00:00"
+      "applied_at": "2026-07-12T17:43:27.031236+00:00",
+      "last_error": "already present in index.ts"
     },
     "cors_nestjs_module_registry::index.ts": {
       "anchor": "// <<<inject:module-exports>>>",
       "version": "1.0.0",
       "priority": 30,
       "file": "src/modules/index.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:28.889649+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:19.851256+00:00",
       "template": "cors.nestjs.module_registry.snippet.j2",
       "module_slug": "free/security/cors",
       "profile": "nestjs/standard",
@@ -2007,15 +2038,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:28.889649+00:00"
+      "applied_at": "2026-07-12T17:43:28.889649+00:00",
+      "last_error": "already present in index.ts"
     },
     "security_headers_nestjs_module_registry::index.ts": {
       "anchor": "// <<<inject:module-exports>>>",
       "version": "1.0.0",
       "priority": 30,
       "file": "src/modules/index.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:21.063849+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:12.501268+00:00",
       "template": "security_headers.nestjs.module_registry.snippet.j2",
       "module_slug": "free/security/security_headers",
       "profile": "nestjs/standard",
@@ -2027,15 +2059,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:21.063849+00:00"
+      "applied_at": "2026-07-12T17:43:21.063849+00:00",
+      "last_error": "already present in index.ts"
     },
     "security_headers_nestjs_health_registry::index.ts": {
       "anchor": "// <<<inject:module-exports>>>",
       "version": "1.0.0",
       "priority": 31,
       "file": "src/modules/index.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:21.070700+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:12.506230+00:00",
       "template": "security_headers.nestjs.health_registry.snippet.j2",
       "module_slug": "free/security/security_headers",
       "profile": "nestjs/standard",
@@ -2047,15 +2080,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:21.070700+00:00"
+      "applied_at": "2026-07-12T17:43:21.070700+00:00",
+      "last_error": "already present in index.ts"
     },
     "users_core_nestjs_module_registry::index.ts": {
       "anchor": "// <<<inject:module-exports>>>",
       "version": "1.0.0",
       "priority": 30,
       "file": "src/modules/index.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:24.964527+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:16.250576+00:00",
       "template": "users_core.nestjs.module_registry.snippet.j2",
       "module_slug": "free/users/users_core",
       "profile": "nestjs/standard",
@@ -2067,15 +2101,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:24.964527+00:00"
+      "applied_at": "2026-07-12T17:43:24.964527+00:00",
+      "last_error": "already present in index.ts"
     },
     "users_core_nestjs_health_registry::index.ts": {
       "anchor": "// <<<inject:module-exports>>>",
       "version": "1.0.0",
       "priority": 31,
       "file": "src/modules/index.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:24.970451+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:16.255924+00:00",
       "template": "users_core.nestjs.health_registry.snippet.j2",
       "module_slug": "free/users/users_core",
       "profile": "nestjs/standard",
@@ -2087,7 +2122,8 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:24.970451+00:00"
+      "applied_at": "2026-07-12T17:43:24.970451+00:00",
+      "last_error": "already present in index.ts"
     },
     "rate_limiting_env::.env": {
       "anchor": "# <<<inject:module-env>>>",
@@ -2095,7 +2131,7 @@
       "priority": 15,
       "file": ".env",
       "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:30.669928+00:00",
+      "last_attempt_at": "2026-08-08T21:42:21.727838+00:00",
       "template": "rate_limiting_env.snippet.j2",
       "module_slug": "free/security/rate_limiting",
       "profile": "nestjs/standard",
@@ -2156,15 +2192,15 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:30.669928+00:00"
+      "applied_at": "2026-08-08T21:42:21.727838+00:00"
     },
     "rate_limiting_env::.env.dev": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 15,
       "file": ".env.dev",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:30.676699+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:21.739643+00:00",
       "template": "rate_limiting_env.snippet.j2",
       "module_slug": "free/security/rate_limiting",
       "profile": "nestjs/standard",
@@ -2225,15 +2261,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:30.676699+00:00"
+      "applied_at": "2026-07-12T17:43:30.676699+00:00",
+      "last_error": "already present in .env.dev"
     },
     "rate_limiting_env::.env.prod": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 15,
       "file": ".env.prod",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:30.683128+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:21.751577+00:00",
       "template": "rate_limiting_env.snippet.j2",
       "module_slug": "free/security/rate_limiting",
       "profile": "nestjs/standard",
@@ -2294,15 +2331,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:30.683128+00:00"
+      "applied_at": "2026-07-12T17:43:30.683128+00:00",
+      "last_error": "already present in .env.prod"
     },
     "rate_limiting_env::.env.example": {
       "anchor": "# <<<inject:module-env>>>",
       "version": "1.0.0",
       "priority": 15,
       "file": ".env.example",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:50:00.906350+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:21.759847+00:00",
       "template": "rate_limiting_env.snippet.j2",
       "module_slug": "free/security/rate_limiting",
       "profile": "nestjs/standard",
@@ -2363,15 +2401,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:50:00.906350+00:00"
+      "applied_at": "2026-07-12T17:50:00.906350+00:00",
+      "last_error": "already present in .env.example"
     },
     "rate_limiting_settings_fields_nestjs::configuration.ts": {
       "anchor": "// <<<inject:configuration>>>",
       "version": "1.0.0",
       "priority": 25,
       "file": "src/config/configuration.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:30.775993+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:21.766916+00:00",
       "template": "rate_limiting_settings_fields_nestjs.snippet.j2",
       "module_slug": "free/security/rate_limiting",
       "profile": "nestjs/standard",
@@ -2383,15 +2422,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:30.775993+00:00"
+      "applied_at": "2026-07-12T17:43:30.775993+00:00",
+      "last_error": "already present in configuration.ts"
     },
     "rate_limiting_nestjs_module_registry::index.ts": {
       "anchor": "// <<<inject:module-exports>>>",
       "version": "1.0.0",
       "priority": 30,
       "file": "src/modules/index.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:30.782161+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:21.773015+00:00",
       "template": "rate_limiting.nestjs.module_registry.snippet.j2",
       "module_slug": "free/security/rate_limiting",
       "profile": "nestjs/standard",
@@ -2403,15 +2443,16 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:30.782161+00:00"
+      "applied_at": "2026-07-12T17:43:30.782161+00:00",
+      "last_error": "already present in index.ts"
     },
     "rate_limiting_nestjs_health_registry::index.ts": {
       "anchor": "// <<<inject:module-exports>>>",
       "version": "1.0.0",
       "priority": 31,
       "file": "src/modules/index.ts",
-      "status": "applied",
-      "last_attempt_at": "2026-07-12T17:43:30.787875+00:00",
+      "status": "failed",
+      "last_attempt_at": "2026-08-08T21:42:21.778833+00:00",
       "template": "rate_limiting.nestjs.health_registry.snippet.j2",
       "module_slug": "free/security/rate_limiting",
       "profile": "nestjs/standard",
@@ -2423,7 +2464,8 @@
         "required": []
       },
       "conflict_resolution": "merge",
-      "applied_at": "2026-07-12T17:43:30.787875+00:00"
+      "applied_at": "2026-07-12T17:43:30.787875+00:00",
+      "last_error": "already present in index.ts"
     }
   }
 }

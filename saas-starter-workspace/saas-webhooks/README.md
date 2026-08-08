@@ -1,6 +1,6 @@
 # saas-webhooks
 
-Dedicated webhook processor with Stripe-style signature verification, event logging, and replay capability. Minimal FastAPI service generated with [RapidKit](https://github.com/rapidkitlabs/rapidkit-core).
+Dedicated webhook processor with Stripe-style signature verification, event logging, and replay capability. Minimal FastAPI service generated with [RapidKit](https://github.com/chistiq/rapidkit-core).
 
 **Related:** Part of [saas-starter-workspace](../README.md) - Production SaaS architecture with 4 microservices.
 
@@ -550,5 +550,5 @@ npx workspai dev --port 8003
 
 **Need help?**
 - Documentation: https://getrapidkit.com/docs
-- GitHub Issues: https://github.com/rapidkitlabs/rapidkit-core/issues
+- GitHub Issues: https://github.com/chistiq/rapidkit-core/issues
 - Stripe Support: https://support.stripe.com

@@ -1,0 +1,7 @@
+---
+description: Legacy RapidKit metadata compatibility alias
+globs: [".rapidkit/**", "**/.rapidkit/**"]
+alwaysApply: false
+---
+
+Use `.cursor/rules/workspai-grounding.mdc` for canonical Workspai grounding.

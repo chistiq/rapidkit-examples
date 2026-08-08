@@ -12,20 +12,26 @@ jobs:
   release-gate:
     name: Examples release gate
     runs-on: ubuntu-latest
+    env:
+      WORKSPAI_VERSION: 0.55.1
+      RAPIDKIT_CORE_VERSION: 0.6.0
 
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20.19.6
+          node-version: 24.18.0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
       - run: python -m pip install poetry==2.4.1
+      - run: npm install --global "workspai@${WORKSPAI_VERSION}"
       - run: npm run check
       - name: Restore RapidKit Core module payloads
         shell: bash
         run: |
+          # hydrate:core uses `rapidkit modules restore --locked --ci` when
+          # the workspace-pinned Core version exposes the restore command.
           npm run hydrate:core -- \
             --workspace quickstart-workspace \
             --project product-api \
@@ -38,6 +44,17 @@ jobs:
             --project saas-api \
             --project saas-admin \
             --project saas-webhooks
+      - name: Verify RapidKit Core community baseline
+        shell: bash
+        run: |
+          for workspace in \
+            quickstart-workspace \
+            my-ai-workspace \
+            saas-starter-workspace
+          do
+            poetry --directory "$workspace" run python -c \
+              "import importlib.metadata as m, os; assert m.version('rapidkit-core') == os.environ['RAPIDKIT_CORE_VERSION']"
+          done
       - name: Verify Python projects
         shell: bash
         env:
@@ -64,4 +81,20 @@ jobs:
             npm --prefix "$project" ci
             npm --prefix "$project" run build
             npm --prefix "$project" test -- --runInBand
+          done
+      - name: Verify current Workspai workspace contracts
+        shell: bash
+        run: |
+          workspai --version
+          for workspace in \
+            quickstart-workspace \
+            my-ai-workspace \
+            saas-starter-workspace
+          do
+            (
+              cd "$workspace"
+              workspai workspace sync --json
+              workspai workspace contract verify --strict --json
+              workspai workspace intelligence run --for-agent generic --json
+            )
           done

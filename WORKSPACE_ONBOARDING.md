@@ -10,6 +10,13 @@ workspace root unless a project README explicitly says otherwise.
 - `npx` access to the `workspai` npm package
 - The runtime required by the projects you intend to run
 
+These examples are validated against `workspai@0.55.1`. Pin that version in
+automation when reproducibility matters:
+
+```bash
+npx --yes workspai@0.55.1 --version
+```
+
 Confirm the CLI before changing workspace state:
 
 ```bash
@@ -19,7 +26,7 @@ npx workspai --help
 
 ## RapidKit Core compatibility
 
-The runnable examples are validated against `rapidkit-core==0.5.5`. The three
+The runnable examples are validated against `rapidkit-core==0.6.0`. The three
 Python workspace roots pin that version exactly. Each project records its own
 runtime dependencies in a lockfile and its installed Core modules in
 `registry.json`.
@@ -40,6 +47,18 @@ ignored `.rapidkit/vendor` runtime payloads from each project's committed
 the generated module state is removed. The payloads remain local and must not
 be committed.
 
+For Core versions that expose the restore command, the direct project-level
+contract is:
+
+```bash
+cd <project-directory>
+rapidkit modules restore --locked --ci
+```
+
+The repository wrapper uses that command when available. If locked resolution
+cannot reproduce a project, it falls back to registry replay and then rejects
+the result unless every restored module exactly matches the committed version.
+
 Each Core-backed project also owns its runtime lockfile. Install and test it
 from the project directory:
 
@@ -57,9 +76,11 @@ Core module compatibility is not represented by `registry.json` alone. A valid
 example requires all of the following to agree:
 
 - the installed version in the project `registry.json`
+- the pinned version in `.rapidkit/modules.lock.yaml`
 - the version selected by any source wrapper
 - the locally hydrated `.rapidkit/vendor/<module>/<version>` payload
-- an applied snippet registry with no `pending` or `failed` entries
+- a snippet registry with no unresolved `pending` entries or actionable
+  failures (`already present` is treated as an idempotent, settled result)
 
 When upgrading Core, update modules through the RapidKit Core command line,
 reconcile snippets, regenerate dependency locks, run project tests, and run the
@@ -75,6 +96,7 @@ You do not need to run every command in this guide on day one.
 | I have an older RapidKit workspace | [Open a legacy workspace](#open-a-legacy-workspace) |
 | I want to create, import, or adopt a project | [Add projects to a workspace](#add-projects-to-a-workspace) |
 | I want change impact and verification | [Run the Workspace Intelligence chain](#run-the-workspace-intelligence-chain) |
+| I want to repair a governed blocker | [Run a governed repair transaction](#run-a-governed-repair-transaction) |
 | I use AI agents or IDE assistants | [Generate files for AI agents and IDEs](#generate-files-for-ai-agents-and-ides) |
 | I am preparing CI or a release | [Before CI or release](#before-ci-or-release) |
 
@@ -198,6 +220,20 @@ reports remain runtime evidence.
 
 ## Run the Workspace Intelligence chain
 
+The supported entry point is the unified, contract-backed runner:
+
+```bash
+npx workspai workspace intelligence run --for-agent generic --strict --json
+```
+
+It executes Model → Diff → Impact → Doctor + Contract Verify + Analyze →
+Readiness → Verify → Context → Agent Sync → Explain in canonical order and
+writes `.workspai/reports/workspace-intelligence-run-last-run.json`.
+
+Use the individual commands below when learning, diagnosing one stage, or
+reviewing intermediate artifacts. They are not a second definition of the
+chain.
+
 After source, dependency, policy, ownership, or contract changes, compare the
 current model with the snapshot created before those changes. Do not overwrite
 that baseline before calculating the diff:
@@ -255,15 +291,60 @@ change, rerun the producing step and every dependent downstream step.
 | Agent context | `.workspai/reports/workspace-context-agent.json` |
 | Agent and IDE grounding | `AGENTS.md`, skills, `INDEX.json`, customization pack |
 | Human-readable reasoning | `.workspai/reports/workspace-explain-last-run.json` |
+| Canonical chain receipt | `.workspai/reports/workspace-intelligence-run-last-run.json` |
+| Governed repair receipt | `.workspai/reports/workspace-repair-last-run.json` |
 
 Developers, CI, IDEs, and AI agents should consume these structured artifacts
 instead of parsing terminal prose.
+
+`workspace explain` publishes explicit `releaseVerdict`, `evidenceFreshness`,
+and `blocking` fields. A `needs-attention` posture with no blocking reasons is
+not a release blocker; consumers must use the structured verdict rather than
+inferring severity from prose.
+
+## Run a governed repair transaction
+
+Workspai repair is a durable transaction, not an unbounded shell session. The
+CLI owns preconditions, approval, checkpointing, execution, reconciliation,
+runtime-native validation, canonical verification, rollback, and the final
+receipt.
+
+Start from a Doctor card and inspect the exact project-scoped plan:
+
+```bash
+npx workspai workspace repair capabilities --json
+npx workspai workspace repair plan --card doctor --project <project-name> --json
+```
+
+Continue with the transaction identifier returned by the plan:
+
+```bash
+npx workspai workspace repair approve \
+  --transaction <transaction-id> --approved-by <local-user> --json
+npx workspai workspace repair execute --transaction <transaction-id> --json
+npx workspai workspace repair status --transaction <transaction-id> --json
+```
+
+When the transaction returns `decision-required`, present only the typed
+options and causes published by the CLI. Do not silently downgrade, force an
+install, accept a breaking change, or fabricate success. A failed transaction
+can be inspected and, when a checkpoint is available, rolled back explicitly:
+
+```bash
+npx workspai workspace repair rollback --transaction <transaction-id> --json
+```
 
 ## Generate files for AI agents and IDEs
 
 Workspai does not replace an agent, model, IDE, or coding assistant. It prepares
 one evidence-backed workspace context and projects it into portable files that
 different consumers can read.
+
+Each example already commits the initial portable projections, so their value
+is visible immediately after clone. `AGENTS.md`, `CLAUDE.md`, Copilot agents and
+instructions, Cursor rules, Claude rules, and operational skills all originate
+from the same workspace contract. Live reports remain local and must be
+regenerated before a tool makes health, impact, or release claims.
 
 Generate context first, then distribute it:
 
@@ -321,6 +402,7 @@ npx workspai workspace run build --json
 ## Before CI or release
 
 ```bash
+npx workspai workspace intelligence run --for-agent generic --strict --json
 npx workspai pipeline --json --strict
 ```
 

@@ -12,7 +12,7 @@ from types import ModuleType
 from typing import Any, Optional
 
 _VENDOR_MODULE = "observability_core"
-_VENDOR_VERSION = "0.1.15"
+_VENDOR_VERSION = "0.1.17"
 _VENDOR_RELATIVE_PATH = "src/health/observability_core.py"
 _VENDOR_ROOT_ENV = "RAPIDKIT_VENDOR_ROOT"
 _CACHE_PREFIX = "rapidkit_vendor_observability_core"
@@ -98,7 +98,9 @@ def _vendor_base_dir() -> Path:
     if candidates:
         return candidates[0]
     raise RuntimeError(
-        "RapidKit vendor payload for '{module}' not found under {root}. Re-run `rapidkit modules install {module}`.".format(
+        "RapidKit vendor payload for '{module}' not found under {root}. "
+        "Run `rapidkit modules restore --locked` for a clean clone, or "
+        "`rapidkit modules install {module}` after changing modules.".format(
             module=_VENDOR_MODULE,
             root=root,
         )
@@ -120,7 +122,9 @@ def _load_vendor_module() -> ModuleType:
     vendor_path = _vendor_file()
     if not vendor_path.exists():
         raise RuntimeError(
-            "RapidKit vendor health runtime missing at {path}. Re-run `rapidkit modules install {module}`.".format(
+            "RapidKit vendor health runtime missing at {path}. "
+            "Run `rapidkit modules restore --locked` for a clean clone, or "
+            "`rapidkit modules install {module}` after changing modules.".format(
                 path=vendor_path,
                 module=_VENDOR_MODULE,
             )

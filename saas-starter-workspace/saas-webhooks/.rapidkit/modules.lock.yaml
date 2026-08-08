@@ -1,0 +1,60 @@
+core_version: 0.6.0
+generated_at: '2026-08-08T21:43:05.482913Z'
+modules:
+  free/essentials/settings:
+    version: 0.1.48
+    tags:
+    - config
+    - settings
+    - env
+  free/essentials/logging:
+    version: 0.1.17
+    tags:
+    - logging
+    - observability
+    - tracing
+  free/essentials/deployment:
+    version: 0.1.16
+    tags:
+    - essentials
+    - deployment
+    - devops
+  free/essentials/middleware:
+    version: 0.1.26
+    tags:
+    - essentials
+    - middleware
+    - http
+  free/database/db_postgres:
+    version: 0.1.33
+    tags:
+    - database
+    - postgresql
+    - sqlalchemy
+    - asyncpg
+    - connection-pool
+  free/cache/redis:
+    version: 0.1.25
+    tags:
+    - cache
+    - datastore
+    - redis
+  free/tasks/celery:
+    version: 0.1.15
+    tags:
+    - tasks
+    - queue
+    - async
+  free/communication/email:
+    version: 0.1.26
+    tags:
+    - communication
+    - email
+    - transactional
+    - marketing
+  free/communication/notifications:
+    version: 0.1.33
+    tags:
+    - communication
+    - notifications
+    - email

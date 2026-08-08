@@ -37,8 +37,16 @@ Create the first baseline, then use the canonical model, diff, impact,
 verification, context, agent-sync, and explain workflow:
 
 ```bash
+npx workspai workspace intelligence run --for-agent generic --json
 npx workspai workspace model --json --write
 npx workspai workspace snapshot --json
 ```
+
+## AI and IDE entry points
+
+Start with `AGENTS.md` for Codex and other agents or
+`.github/copilot-instructions.md` for Copilot. Claude and Cursor receive the
+same workspace grounding through `CLAUDE.md`, `.claude/`, and `.cursor/`.
+Refresh current evidence with the intelligence command above after cloning.
 
 Complete workflow: [Workspace onboarding](../WORKSPACE_ONBOARDING.md).

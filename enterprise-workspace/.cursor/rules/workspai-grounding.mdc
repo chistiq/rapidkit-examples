@@ -1,0 +1,17 @@
+---
+description: Workspai workspace evidence and intelligence grounding
+globs: []
+alwaysApply: true
+---
+
+Before proposing fixes in this workspace:
+
+1. Read `AGENTS.md` and `.workspai/reports/INDEX.json`.
+2. Read only task-relevant context from `.workspai/reports/workspace-context-agent.json`.
+3. Prefer bounded graph search and evidence reports over full-repo exploration.
+
+Refresh when stale:
+
+```bash
+npx workspai workspace agent-sync --write --refresh-context
+```

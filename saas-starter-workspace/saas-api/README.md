@@ -1,6 +1,6 @@
 # saas-api
 
-Product API for SaaS applications with authentication, subscriptions, and team management. Domain-driven FastAPI service generated with [RapidKit](https://github.com/rapidkitlabs/rapidkit-core).
+Product API for SaaS applications with authentication, subscriptions, and team management. Domain-driven FastAPI service generated with [RapidKit](https://github.com/chistiq/rapidkit-core).
 
 **Related:** Part of [saas-starter-workspace](../README.md) - Production SaaS architecture with 4 microservices.
 
@@ -409,5 +409,5 @@ curl http://localhost:8000/api/health/module/auth-core
 
 **Need help?**
 - Documentation: https://getrapidkit.com/docs
-- GitHub Issues: https://github.com/rapidkitlabs/rapidkit-core/issues
+- GitHub Issues: https://github.com/chistiq/rapidkit-core/issues
 - Community: https://discord.gg/rapidkit
