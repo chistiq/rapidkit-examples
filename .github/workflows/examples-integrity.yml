@@ -82,6 +82,22 @@ jobs:
             npm --prefix "$project" run build
             npm --prefix "$project" test -- --runInBand
           done
+      - name: Materialize CI-only project environments
+        shell: bash
+        run: |
+          # Public examples commit reviewed templates, never populated runtime
+          # environment files. Doctor verifies the materialized runtime state,
+          # so create ephemeral, owner-readable copies only on this runner.
+          for workspace in \
+            quickstart-workspace \
+            my-ai-workspace \
+            saas-starter-workspace
+          do
+            while IFS= read -r -d '' template
+            do
+              install -m 600 "$template" "${template%.example}"
+            done < <(find "$workspace" -mindepth 2 -maxdepth 2 -name .env.example -print0)
+          done
       - name: Verify current Workspai workspace contracts
         shell: bash
         run: |

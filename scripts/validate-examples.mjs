@@ -736,6 +736,8 @@ if (fs.existsSync(workflowPath)) {
     'RAPIDKIT_CORE_VERSION: 0.6.0',
     'npm install --global "workspai@${WORKSPAI_VERSION}"',
     'Verify RapidKit Core community baseline',
+    'Materialize CI-only project environments',
+    'install -m 600 "$template" "${template%.example}"',
     'workspai workspace intelligence run --for-agent generic --json',
   ]) {
     if (!workflow.includes(requirement)) {
